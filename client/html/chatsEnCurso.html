@@ -1,0 +1,78 @@
+<!-- Declaración del tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Idioma principal del contenido: español -->
+<html lang="es">
+<head>
+  <!-- Configuración de codificación de caracteres -->
+  <meta charset="UTF-8" />
+
+  <!-- Adaptabilidad para pantallas móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Título de la pestaña del navegador -->
+  <title>Chats en Curso - Soporte</title>
+
+  <!-- Vinculación al archivo de estilos CSS -->
+  <link rel="stylesheet" href="../css/chatsEnCurso.css" />
+</head>
+
+<body>
+  <!-- Encabezado del sitio -->
+  <header>
+    <div class="container">
+      <!-- Título visible para el agente de soporte -->
+      <h1>Chats en Curso - Soporte</h1>
+
+      <!-- Navegación superior -->
+      <nav>
+        <!-- Regreso al panel principal de soporte -->
+        <a href="/html/soporte.html">← Volver</a>
+
+        <!-- Botón para cerrar sesión -->
+        <a href="/" id="cerrar-sesion">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="container">
+    <section id="chats-en-curso">
+      <!-- Título de la sección de chats activos -->
+      <h2>Conversaciones Activas</h2>
+
+      <!-- Lista dinámica donde se insertarán los chats activos desde JS -->
+      <ul id="lista-chats">
+        <!-- Aquí se insertan los chats activos -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Tienda de Ropa - Soporte.</p>
+    </div>
+  </footer>
+
+  <!-- Script para cargar los chats activos dinámicamente -->
+  <script src="../js/chatsEnCurso.js"></script>
+
+  <script>
+    // Verifica que el usuario sea del rol "soporte"
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (!usuario || usuario.rol !== 'soporte') {
+      alert('Acceso denegado. Esta sección es solo para personal de soporte.');
+      window.location.href = '/html/catalogo.html';
+    }
+
+    // Lógica de cierre de sesión: elimina el token y redirige al inicio
+    const btnCerrar = document.getElementById('cerrar-sesion');
+    btnCerrar.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('usuario');
+      window.location.href = '/';
+    });
+  </script>
+</body>
+</html>

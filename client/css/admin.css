@@ -1,0 +1,245 @@
+/* =========================
+   Reset + Tokens de diseño
+   ========================= */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+
+:root{
+  /* Base oscura + tipografía */
+  --bg: #0b0c10;
+  --surface: #121318;
+  --txt: #e9ecf1;
+  --muted:#b7beca;
+  --border: rgba(255,255,255,.12);
+  --glass: rgba(255,255,255,.08);
+
+  /* Dorados */
+  --gold: #D4AF37;
+  --gold-deep:#A57A03;
+  --gold-soft:#F6E6A9;
+  --grad-gold: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botones */
+  --gold-700:#8A6C00; --gold-800:#6B4E00;
+  --grad-gold-btn: linear-gradient(135deg, var(--gold-700), var(--gold-800));
+
+  /* Bordes y radios */
+  --radius: 14px;
+  --shadow: 0 12px 30px rgba(0,0,0,.28);
+}
+
+/* Fondo con halos dorados */
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
+  color: var(--txt);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+  display:flex; flex-direction:column;
+}
+
+/* Orbes flotando (decorativos) */
+.bg-orbs{
+  position:fixed; inset:0; pointer-events:none; z-index:-1;
+  background:
+    radial-gradient(320px 260px at 12% 24%, rgba(234,179,8,.12), transparent 60%),
+    radial-gradient(380px 300px at 88% 78%, rgba(180,83,9,.10), transparent 60%);
+  animation: floatOrbs 16s ease-in-out infinite alternate;
+  filter:saturate(1.05);
+}
+@keyframes floatOrbs{
+  from{ transform: translate3d(0,0,0) }
+  to{   transform: translate3d(0,-10px,0) }
+}
+/* Respeto accesibilidad: menos movimiento si el usuario lo pide */
+@media (prefers-reduced-motion: reduce){
+  .bg-orbs{ animation: none }
+}
+
+/* =========================
+   Layout
+   ========================= */
+.container{width:min(1200px,92%);margin:0 auto}
+.content{padding:24px 0 36px}
+
+/* Header con glass + blur */
+.site-header{
+  position:sticky; top:0; z-index:1000;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  border-bottom:1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+
+/* Logo con texto dorado (gradiente) */
+.logo{
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  font-weight:800; letter-spacing:.3px;
+  background: var(--grad-gold);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* Nav */
+.nav{display:flex;align-items:center;gap:10px}
+.nav-link{
+  color:var(--txt); text-decoration:none; padding:.5rem .75rem; border-radius:999px;
+  border:1px solid transparent;
+}
+.nav-link:hover{ background: var(--glass); }
+
+/* Footer centrado */
+.site-footer{margin-top:auto;border-top:1px solid var(--border);background:#0e0f12}
+.footer-inner{display:flex;align-items:center;justify-content:center;gap:8px;padding:18px 0;color:var(--muted)}
+
+/* =========================
+   Toolbar + botones
+   ========================= */
+.toolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; margin:12px 0 10px;
+  flex-wrap:wrap;
+}
+.page-title{
+  font-size: clamp(1.2rem, 3.2vw, 1.6rem); line-height:1.2;
+  background: var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* Botones base */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.65rem 1rem; border-radius:999px; border:1px solid transparent; cursor:pointer;
+  transition: transform .15s ease, filter .15s ease, border-color .15s ease;
+  text-decoration:none; font-weight:700;
+}
+.btn:hover{ transform: translateY(-1px); }
+
+.btn-primary{
+  background: var(--grad-gold-btn); color:#fff; border:1px solid var(--gold);
+  box-shadow: var(--shadow);
+}
+.btn-primary:hover{ filter: brightness(1.06); }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)); }
+.btn-primary:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+
+.btn-ghost{
+  background: rgba(255,255,255,.06);
+  border:1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  color: var(--txt);
+}
+.btn-ghost:hover{ background: color-mix(in oklab, var(--gold) 12%, transparent); border-color: var(--gold); }
+.btn-outline{
+  background: transparent;
+  border:1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+  color:#e9ecf1;
+}
+.btn-outline:hover{ background: color-mix(in oklab, var(--gold) 14%, transparent); border-color: var(--gold); }
+
+/* =========================
+   Tabla de usuarios
+   ========================= */
+.table-wrap{
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:auto;
+}
+
+/* Cabecera sticky para mejor usabilidad */
+.datatable{ width:100%; border-collapse:collapse; min-width:720px }
+.datatable thead th{
+  position: sticky; top: 0; z-index: 1;
+  background: #0f1116; color:#fff;
+  padding: 12px 14px; text-align:left; font-weight:800; letter-spacing:.2px;
+  border-bottom:1px solid var(--border);
+}
+.datatable tbody td{
+  padding: 12px 14px; border-bottom:1px solid var(--border);
+}
+.datatable tbody tr{
+  animation: rowIn .4s ease both;
+}
+@keyframes rowIn{
+  from{ opacity:0; transform: translateY(6px) }
+  to{   opacity:1; transform: translateY(0) }
+}
+@media (prefers-reduced-motion: reduce){
+  .datatable tbody tr{ animation:none }
+}
+
+/* Hover y zebra */
+.datatable tbody tr:hover{ background: rgba(255,255,255,.04) }
+.datatable tbody tr:nth-child(even){ background: rgba(255,255,255,.02) }
+
+/* Chips para Rol/Estado — no cambian tu texto, solo el look */
+.chip{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:.25rem .6rem; border-radius:999px; font-weight:700; font-size:.85rem;
+  border:1px solid;
+}
+.rol-admin{    color:#f59e0b; border-color:#f59e0b40; background:#f59e0b1a }
+.rol-empleado{ color:#60a5fa; border-color:#60a5fa40; background:#60a5fa1a }
+.rol-usuario{  color:#a3e635; border-color:#a3e63540; background:#a3e6351a }
+
+.estado-activo{   color:#34d399; border-color:#34d39940; background:#34d3991a }
+.estado-inactivo{ color:#f87171; border-color:#f8717140; background:#f871711a }
+
+/* Botones de acción existentes (.editar / .eliminar) mejorados */
+button.editar, button.eliminar{
+  padding:.45rem .7rem; border-radius:10px; border:1px solid transparent; cursor:pointer;
+  color:#fff; font-weight:800; transition: transform .12s ease, filter .12s ease, border-color .12s ease;
+}
+button.editar{   background:#2563eb; }
+button.eliminar{ background:#e11d48; }
+button.editar:hover, button.eliminar:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+button.editar:active, button.eliminar:active{ transform: translateY(0) }
+
+/* =========================
+   Modal accesible + animado
+   ========================= */
+/* Garantiza que 'hidden' siempre oculte si alguna vez lo usas */
+.modal[hidden]{ display:none !important; }
+
+/* CAMBIO: el modal está OCULTO por defecto */
+.modal{
+  position: fixed; inset: 0;
+  display: none;              /* ← antes estaba 'flex' */
+  align-items:center; justify-content:center; z-index: 1000;
+  background: rgba(0,0,0,.55); backdrop-filter: blur(6px);
+  padding: 24px;
+}
+
+/* Si prefieres abrirlo por clase en tu JS, puedes usar .is-open */
+.modal.is-open{ display:flex; }
+
+.modal-content{
+  width: min(480px, 92vw); background: #111319; color: var(--txt);
+  border:1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow); padding: 18px;
+  transform: scale(.96); opacity: 0; animation: modalIn .22s ease forwards;
+}
+@keyframes modalIn{
+  to{ transform: scale(1); opacity: 1 }
+}
+@media (prefers-reduced-motion: reduce){
+  .modal-content{ animation:none; opacity:1; transform:none }
+}
+.modal-title{
+  margin-bottom: 10px; font-size: 1.15rem; font-weight:800;
+  background: var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+.modal-content input,
+.modal-content select{
+  width:100%; margin-bottom:10px; padding:10px 12px;
+  border-radius:10px; border:1px solid var(--border); background:#0f1116; color:var(--txt);
+}
+.modal-actions{ display:flex; align-items:center; justify-content:flex-end; gap:10px; margin-top:6px }
+
+/* =========================
+   Responsivo
+   ========================= */
+@media (max-width: 860px){
+  .toolbar{ gap:10px }
+  .datatable{ min-width:640px }
+}

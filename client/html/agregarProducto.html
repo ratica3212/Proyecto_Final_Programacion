@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrador — Productos activos & agregar</title>
+  <link rel="stylesheet" href="../css/afregarProducto.css" />
+</head>
+
+<body>
+  <!-- Orbes/luces de fondo -->
+  <div class="bg-orbs" aria-hidden="true"></div>
+
+  <!-- Header con glass -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">Panel de productos</h1>
+
+      <nav class="nav">
+        <a class="nav-link" href="admin.html">← Volver al Panel</a>
+        <a class="nav-link" href="catalogo.html">Ver catálogo</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Intro/héroe breve -->
+  <section class="hero container">
+    <div class="hero-copy">
+      <h2 class="page-title">Productos activos</h2>
+      <p class="sub">Administra el inventario y añade nuevos ítems en segundos.</p>
+    </div>
+  </section>
+
+  <main class="container content">
+    <!-- Tarjeta: Formulario de agregado (IDs/names intactos) -->
+    <section class="card card-form" aria-labelledby="agregarTitle">
+      <h3 id="agregarTitle" class="card-title">Agregar nuevo producto</h3>
+
+      <!-- Mismo id, enctype y names -->
+      <form id="form-agregar-producto" class="form-grid" enctype="multipart/form-data" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" name="nombre" placeholder="Nombre del producto" required />
+        </div>
+
+        <div class="field field--wide">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" name="descripcion" rows="2" placeholder="Descripción" required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="precio">Precio</label>
+          <input id="precio" type="number" name="precio" step="0.01" placeholder="Ej: 159900" required />
+        </div>
+
+        <!-- Grupo de imagen: radios + file/url (IDs y names iguales) -->
+        <fieldset class="field field--wide grupo-imagen">
+          <legend>Imagen del producto</legend>
+
+          <div class="opciones-imagen">
+            <label class="radio-pill">
+              <input type="radio" name="modoImagen" value="file" checked />
+              <span>Subir archivo</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="modoImagen" value="url" />
+              <span>Usar URL</span>
+            </label>
+          </div>
+
+          <!-- Subir archivo -->
+          <div class="fila" id="fila-file">
+            <input type="file" id="imageFile" name="imageFile" accept="image/*" />
+            <img id="preview" alt="Vista previa" />
+          </div>
+
+          <!-- URL de imagen -->
+          <div class="fila" id="fila-url" style="display:none;">
+            <input type="url" id="imageUrl" name="imagen_url" placeholder="https://...">
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="categoria_id">Categoría</label>
+          <select id="categoria_id" name="categoria_id" required>
+            <option value="">Selecciona una categoría</option>
+            <option value="1">Camisas</option>
+            <option value="3">Pantalones</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="stock">Stock</label>
+          <input id="stock" type="number" name="stock" placeholder="Existencias" required />
+        </div>
+
+        <div class="acciones">
+          <button type="submit" class="btn btn-primary">Agregar producto</button>
+        </div>
+      </form>
+
+      <!-- Feedback de tu lógica -->
+      <p id="mensaje-producto" class="mensaje"></p>
+    </section>
+
+    <!-- Tarjeta: Tabla de productos activos -->
+    <section class="card card-table" aria-labelledby="listaTitle">
+      <h3 id="listaTitle" class="card-title">Productos actuales</h3>
+
+      <div class="table-wrap">
+        <table id="tabla-productos" class="datatable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Categoría</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody><!-- Tu JS pinta aquí --></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer centrado -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Tienda de Ropa. Panel del Administrador.</p>
+    </div>
+  </footer>
+
+  <!-- Tu lógica (intacta) -->
+  <script src="../js/agregarProducto.js"></script>
+</body>
+</html>

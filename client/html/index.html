@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda de Ropa</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <meta name="theme-color" content="#0e0f12" />
+</head>
+<body class="home">
+  <!-- Header sticky con glassmorphism -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Inicio">Tienda de Ropa KJ</a>
+
+      <!-- Toggle móvil sin JS -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
+      <label for="nav-toggle" class="hamburger" aria-label="Abrir menú" aria-controls="primary-nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav id="primary-nav" class="nav">
+        <a href="#" class="nav-link">Inicio</a>
+        <a href="html/IniciarSesion.html" id="link-login" class="btn btn-primary">Iniciar sesión</a>
+        <a href="html/registro.html" id="link-register" class="btn btn-ghost">Registrarse</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Logo -->
+    <section class="hero hero--logo">
+      <img src="img/logo12.png" alt="Moda y estilo" />
+    </section>
+
+    <!-- Tarjetas -->
+    <section class="bento container">
+      <article class="bento-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 7h11v7h2l3-4h2v7h-2a3 3 0 1 1-6 0H9a3 3 0 1 1-6 0H1V9a2 2 0 0 1 2-2Z" fill="currentColor"/></svg>
+        </div>
+        <h3>Envíos rápidos</h3>
+        <p>Entrega solo en medellin 24–72h y seguimiento en tiempo real.</p>
+      </article>
+      <article class="bento-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 2l7 3v6c0 5-3.8 9.7-7 11-3.2-1.3-7-6-7-11V5l7-3Z" fill="currentColor"/></svg>
+        </div>
+        <h3>Compras seguras</h3>
+        <p>Pagos protegidos y cambios fáciles dentro de 15 días.</p>
+      </article>
+      <article class="bento-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 4h16v10H7l-3 3V4Z" fill="currentColor"/></svg>
+        </div>
+        <h3>Soporte 24/7</h3>
+        <p>Escríbenos cuando quieras. Respuesta en minutos. Iniciar sesion para hacer uso del soporte</p>
+      </article>
+    </section>
+
+    <!-- Lookbook -->
+    <section class="lookbook container">
+      <div class="look look-a">
+        <div class="look-inner">
+          <h3>Colección Urban</h3>
+          <p>Descubre el drop más reciente.</p>
+          <a href="html/IniciarSesion.html" class="btn btn-ghost">Acceder</a>
+        </div>
+      </div>
+      <div class="look look-b">
+        <div class="look-inner">
+          <h3>Essentials</h3>
+          <p>Calidad, fit y comodidad.</p>
+          <a href="html/IniciarSesion.html" class="btn btn-ghost">Acceder</a>
+        </div>
+      </div>
+      <div class="look look-c">
+        <div class="look-inner">
+          <h3>Accesorios</h3>
+          <p>Detalles que elevan tu outfit.</p>
+          <a href="html/IniciarSesion.html" class="btn btn-ghost">Acceder</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner CTA -->
+    <section class="cta-banner container">
+      <h2>¿Listo para ver el catálogo completo?</h2>
+      <p>Crea tu cuenta o inicia sesión y desbloquea colecciones, talles y precios.</p>
+      <div class="cta-group">
+        <a href="html/IniciarSesion.html" class="btn btn-primary">Iniciar sesión</a>
+        <a href="html/registro.html" class="btn btn-outline">Registrarse</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Tienda de Ropa.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

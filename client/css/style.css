@@ -1,0 +1,316 @@
+/* ============= Reset & Variables ============= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  --bg: #0b0c10;
+  --surface: #121318;
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+  --txt: #e9ecf1;
+  --muted: #b7beca;
+
+  /* Morados originales (se conservan para otras vistas si los usas) */
+  --brand: #7c5cff;
+  --brand-2: #ff2e63;
+  --grad: linear-gradient(135deg, var(--brand) 0%, #9a6bff 35%, var(--brand-2) 100%);
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* Paleta dorada (logo/encabezados/botones) */
+  --gold: #D4AF37;
+  --gold-deep: #A57A03;
+  --gold-soft: #F6E6A9;
+  --grad-gold: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario en oro oscuro (mejor contraste con texto blanco) */
+  --gold-700: #8A6C00;
+  --gold-800: #6B4E00;
+  --grad-gold-btn: linear-gradient(135deg, var(--gold-700), var(--gold-800));
+}
+
+html, body { height: 100%; }
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(124,92,255,.16), transparent),
+    radial-gradient(900px 500px at 10% 10%, rgba(255,46,99,.12), transparent),
+    var(--bg);
+  color: var(--txt);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Home con tono dorado */
+body.home{
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+}
+
+.container{ max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ============= Header Sticky ============= */
+.site-header{
+  position: sticky; top: 0; z-index: 1000;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner{ display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 12px; }
+
+/* LOGO en dorado */
+.logo{
+  font-weight: 700; letter-spacing: .3px; text-decoration: none;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 1.15rem;
+}
+
+.nav{ display: flex; align-items: center; gap: 10px; }
+.nav a{ color: var(--txt); text-decoration: none; padding: .5rem .75rem; border-radius: 999px; }
+.nav-link:hover{ background: var(--glass); }
+
+.nav-toggle{ display:none; }
+.hamburger{
+  display:none; width:40px; height:40px; border-radius:12px; border:1px solid var(--border);
+  align-items:center; justify-content:center; cursor:pointer;
+}
+.hamburger span{ display:block; width:20px; height:2px; background:var(--txt); margin:3px 0; border-radius:2px; }
+
+/* ============= Botones (oro) ============= */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding: .65rem 1rem; border-radius: 999px; border: 1px solid transparent;
+  text-decoration:none; cursor:pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  will-change: transform;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); }
+
+/* Primario en dorado */
+.btn-primary{
+  background: var(--grad-gold-btn);
+  color: #fff;
+  border: 1px solid var(--gold);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+.btn-primary:hover{ filter: brightness(1.06); }
+.btn-primary:focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)); }
+
+/* Ghost/Outline a juego */
+.btn-outline{
+  background: transparent;
+  border-color: color-mix(in oklab, var(--gold) 55%, transparent);
+  color: #e9ecf1;
+}
+.btn-outline:hover{ background: color-mix(in oklab, var(--gold) 14%, transparent); border-color: var(--gold); }
+
+.btn-ghost{
+  background: rgba(255,255,255,.06);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  color: #e9ecf1;
+}
+.btn-ghost:hover{ background: color-mix(in oklab, var(--gold) 12%, transparent); border-color: var(--gold); }
+
+.btn-lg{ padding: .9rem 1.25rem; font-size: 1.05rem; }
+
+/* Estado de link activo en el nav (opcional) */
+.nav .nav-link[aria-current="page"],
+.nav .nav-link.active{
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+}
+
+/* ============= HERO ============= */
+.hero{
+  position: relative; isolation: isolate; min-height: 78vh; display: grid; place-items: center;
+}
+.hero img{
+  width: 100%; height: 78vh; object-fit: cover; display:block; filter: saturate(1.05) contrast(1.02);
+}
+.hero-overlay{
+  position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.55) 10%, rgba(0,0,0,.35) 40%, rgba(0,0,0,.65) 100%),
+    radial-gradient(800px 400px at 80% 0%, rgba(124,92,255,.35), transparent 60%);
+}
+.hero-content{
+  position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; justify-content:center;
+  gap: 14px; padding: clamp(24px, 6vw, 64px);
+}
+.eyebrow{ text-transform: uppercase; letter-spacing: .12em; font-size:.8rem; color: var(--muted); }
+.hero h1{ font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; max-width: 15ch; }
+.hero .sub{ color: var(--muted); max-width: 45ch; }
+.cta-group{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 4px; }
+
+/* HERO variante de logo (imagen completa) */
+.hero.hero--logo{
+  min-height: clamp(520px, 72vh, 860px);
+  display: grid;
+  place-items: center;
+}
+.hero.hero--logo img{
+  height: min(72vh, 780px);
+  max-height: 86vh;
+  width: min(92vw, 1400px);
+  object-fit: contain;         /* imagen completa sin recortes */
+  object-position: center center;
+}
+.hero.hero--logo .hero-overlay{
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.70) 100%),
+    radial-gradient(800px 360px at 25% 30%, color-mix(in oklab, var(--gold) 24%, transparent), transparent 70%);
+}
+.hero.hero--logo h1,
+.hero.hero--logo .sub{ color: #e9ecf1; }
+
+/* ============= Títulos en dorado (a juego con el logo) ============= */
+.hero h1,
+.bento-card h3,
+.look h3,
+.cta-banner h2,
+.page-title,
+h1.section-title,
+h2.section-title{
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Fallback si no hay soporte de background-clip:text */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  .hero h1,
+  .bento-card h3,
+  .look h3,
+  .cta-banner h2,
+  .page-title,
+  h1.section-title,
+  h2.section-title{ color: var(--gold); }
+}
+
+/* Subtítulos/descripcion con buen contraste */
+.hero .sub,
+.bento-card p,
+.look p,
+.cta-banner p{ color: #e9ecf1; }
+
+/* ============= Bento / Beneficios ============= */
+.bento{
+  display:grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin: 40px auto;
+}
+.bento-card{
+  grid-column: span 4; background: var(--glass); border:1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; min-height: 140px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+  display:flex; flex-direction:column; gap:8px; backdrop-filter: blur(8px);
+}
+.bento-card .icon{
+  width:40px; height:40px; display:grid; place-items:center;
+  color: var(--gold); background: rgba(212,175,55,.15); border-radius: 10px;
+}
+
+/* ============= Lookbook (igual tamaño) ============= */
+.lookbook{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  margin: 16px auto 48px;
+}
+/* 3 columnas iguales en desktop */
+.look{
+  position:relative;
+  grid-column: span 4;          /* 12 / 3 = 4 */
+  aspect-ratio: 16 / 9;         /* altura uniforme */
+  border-radius: var(--radius);
+  overflow: hidden;
+  border:1px solid var(--border);
+  background: #1a1c24;
+}
+.look::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.55));
+}
+.look .look-inner{
+  position:absolute; inset:auto 0 0 0; padding: 18px; z-index:2;
+  display:flex; flex-direction:column; gap:6px;
+}
+.look h3{ font-size:1.15rem; }
+.look p{ color: var(--muted); }
+.look-a{ background: url('img/look-a.jpg') center / cover no-repeat, #1a1c24; }
+.look-b{ background: url('img/look-b.jpg') center / cover no-repeat, #1a1c24; }
+.look-c{ background: url('img/look-c.jpg') center / cover no-repeat, #1a1c24; }
+
+/* ============= Banner CTA ============= */
+.cta-banner{
+  background: var(--glass); border:1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  padding: clamp(16px, 3vw, 28px); text-align: center; backdrop-filter: blur(8px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.18);
+}
+.cta-banner h2{ font-size: clamp(1.2rem, 3.5vw, 1.8rem); margin-bottom: 6px; }
+.cta-banner p{ color: var(--muted); margin-bottom: 10px; }
+
+/* ============= Footer ============= */
+.site-footer{ margin-top: 48px; border-top: 1px solid var(--border); background: #0e0f12; }
+.footer-inner{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 18px 0; }
+.socials{ display:flex; gap:10px; }
+.social{ display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background: var(--glass); color: var(--txt); border:1px solid var(--border); }
+.social:hover{ transform: translateY(-1px); }
+
+/* ============= Widget de soporte ============= */
+#icono-soporte{
+  position: fixed; bottom: 20px; right: 20px; background: #fff; border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25); width: 60px; height: 60px; cursor: pointer; z-index: 1000;
+  display:flex; align-items:center; justify-content:center; transition: transform .25s ease;
+  touch-action: none; user-select: none; -webkit-user-drag: none; cursor: grab;
+}
+#icono-soporte:hover{ transform: scale(1.08) rotate(4deg); }
+#icono-soporte.dragging{ cursor: grabbing; }
+#chatModal{
+  position: fixed; bottom: 90px; right: 20px; background: #fff; color:#111; padding: 18px; border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25); z-index: 1001; display: none; width: 300px; max-width: 90vw;
+}
+
+/* ============= Responsive ============= */
+@media (max-width: 920px){
+  .hamburger{ display:flex; }
+  .nav{
+    position: fixed; inset: 64px 0 auto 0; background: rgba(10,10,12,.92); backdrop-filter: blur(10px);
+    padding: 16px; display:none; flex-direction:column; gap:8px; border-bottom: 1px solid var(--border);
+  }
+  .nav a{ width: 100%; text-align: center; }
+  .nav-toggle:checked ~ .hamburger + .nav{ display:flex; }
+}
+
+/* Tablet: 2 columnas iguales */
+@media (max-width: 1100px){
+  .look{ grid-column: span 6; } /* 12 / 2 = 6 */
+}
+
+/* Móvil: 1 columna */
+@media (max-width: 768px){
+  .bento-card{ grid-column: span 12; }
+  .look{ grid-column: span 12; aspect-ratio: auto; min-height: 220px; } /* quita proporción estricta */
+  .footer-inner{ flex-direction: column; align-items: flex-start; }
+  .hero img{ height: 68vh; }
+  .hero.hero--logo img{ height: min(64vh, 720px); }
+}
+
+/* Compat: grid utilities previos (por si los usas en otras vistas) */
+.productos{
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px; margin-top: 30px;
+}
+.card{
+  background: #1a1c24; color: var(--txt); padding: 15px; border-radius: 12px;
+  border:1px solid var(--border); text-align:center; transition: transform .25s ease;
+}
+.card:hover{ transform: translateY(-3px); }
+.card img{ max-width: 100%; border-radius: 8px; margin-bottom: 10px; }
+.card .precio{ color: var(--brand); font-weight: 700; }

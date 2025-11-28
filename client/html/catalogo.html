@@ -1,0 +1,109 @@
+<!-- Define el documento como HTML5 -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogos - Tienda de Ropa</title>
+  <link rel="stylesheet" href="../css/catalogo.css" />
+  <meta name="theme-color" content="#0e0f12" />
+</head>
+
+<body>
+  <!-- Encabezado -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 class="logo">Tienda de Ropa</h1>
+
+      <!-- Barra de navegación del catálogo -->
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="admin.html" id="volver-admin" class="nav-link" style="display:none; margin-right: 1rem;">
+          Volver al panel
+        </a>
+
+        <a href="carritoPedido.html" id="carrito-icono" class="nav-link" style="display: none;">
+          <img src="../img/img2.jpg" alt="Carrito" width="24" height="24" />
+        </a>
+
+        <a href="misPedidos.html" id="ver-pedidos" class="btn btn-ghost">Mis Pedidos</a>
+        <a href="/" id="cerrar-sesion" class="btn btn-outline">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero sencillo (sin productos) -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Catálogos</p>
+      <h2>Explora por categoría</h2>
+      <p class="sub">Elige una categoría para ver colecciones, tallas y precios.</p>
+    </div>
+  </section>
+
+  <!-- Contenido principal -->
+  <main class="container">
+    <h2 class="visually-hidden">Catálogos Disponibles</h2>
+
+    <!-- Grid de categorías -->
+    <div class="catalogo-lista">
+      <div class="catalogo-card cat-camisas" onclick="window.location.href='camisas.html'" role="button" tabindex="0" aria-label="Ver catálogo de Camisas">
+        <div class="card-overlay">
+          <h3>Camisas</h3>
+          <span class="card-cta" aria-hidden="true">Ver más →</span>
+        </div>
+      </div>
+
+      <div class="catalogo-card cat-pantalones" onclick="window.location.href='pantalones.html'" role="button" tabindex="0" aria-label="Ver catálogo de Pantalones">
+        <div class="card-overlay">
+          <h3>Pantalones</h3>
+          <span class="card-cta" aria-hidden="true">Ver más →</span>
+        </div>
+      </div>
+    </div>
+
+    
+  </main>
+  
+<!-- Banner informativo breve (no altera tu lógica) -->
+    <section class="info-banner" aria-label="Beneficios">
+      <p>Envíos 24–72h · Cambios fáciles · Pagos seguros</p>
+    </section>
+
+
+  <!-- Pie de página -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Tienda de Ropa.</p>
+    </div>
+  </footer>
+
+  <!-- Ícono flotante de acceso al soporte (conservo ID) -->
+  <div id="icono-soporte" title="Soporte">
+    <img src="/img/nube.png" alt="Abrir soporte" width="50" height="50" />
+  </div>
+
+  <!-- Widget de chat de soporte (conservo estructura e IDs) -->
+  <div id="widget-chat" style="display: none;">
+    <div class="chat-head"><strong>Soporte en línea</strong></div>
+
+    <div id="chat-inicial" class="chat-inicial">
+      <p>¿Cómo podemos ayudarte?</p>
+      <button id="btn-hablar-agente" class="btn btn-primary">Hablar con un agente</button>
+      <button id="btn-cerrar-chat" class="btn btn-ghost">Cerrar</button>
+    </div>
+
+    <p id="estadoEspera" class="chat-estado" style="display:none;"></p>
+
+    <div id="chat-mensajes" class="chat-msgs" style="display:none;"></div>
+
+    <div class="chat-input-wrap" style="display:none;">
+      <input type="text" id="input-chat" placeholder="Escribe tu mensaje..." />
+      <button id="btn-enviar-chat" class="btn btn-primary">Enviar</button>
+    </div>
+  </div>
+
+  <!-- Scripts existentes -->
+  <script src="../js/main.js" defer></script>
+  <script src="../js/soporte.js"></script>
+</body>
+</html>

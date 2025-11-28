@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito - Tienda de Ropa</title>
+  <link rel="stylesheet" href="../css/carritoPedido.css" />
+  <meta name="theme-color" content="#0e0f12" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 class="brand">Tienda de Ropa</h1>
+      <nav class="nav" aria-label="Navegación principal">
+        <a class="nav-back" href="catalogo.html">← Catálogo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="page-title">Mi carrito</h2>
+
+    <section class="cart-layout" aria-label="Contenido del carrito">
+      <!-- Lista de ítems (tu JS inyecta aquí) -->
+      <div id="cart-items" class="cart-items" aria-live="polite"></div>
+
+      <!-- Resumen -->
+      <aside class="cart-summary" aria-label="Resumen del pedido">
+        <h3>Resumen del pedido</h3>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotal">$0.00</span>
+        </div>
+
+        <div class="summary-row">
+          <span>Domicilio</span>
+          <span id="shipping">$0.00</span>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <span id="total">$0.00</span>
+        </div>
+
+        <!-- Tu lógica decide cuándo mostrarlo (hidden por defecto) -->
+        <button id="realizarPedidoBtn" class="btn-primary" hidden>Realizar Pedido</button>
+
+        <p class="note">
+          El pago se realiza en <strong>Mis pedidos</strong> tras crear el pedido.
+        </p>
+      </aside>
+    </section>
+
+    <!-- Estado carrito vacío (tu JS quita/pon hidden) -->
+    <div id="cart-empty" class="cart-empty" hidden>
+      <p>Tu carrito está vacío.</p>
+      <a href="catalogo.html" class="btn-link">Ver catálogos</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Tienda de Ropa.</p>
+    </div>
+  </footer>
+
+  <!-- No toco tu lógica: se mantiene tu JS -->
+  <script src="../js/carrito.js"></script>
+</body>
+</html>

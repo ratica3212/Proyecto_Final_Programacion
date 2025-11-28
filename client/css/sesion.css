@@ -1,0 +1,209 @@
+/* ==== Reset + Variables (tema dorado) ==== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --bg: #0b0c10;
+  --surface: #121318;
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+  --txt: #e9ecf1;
+  --muted: #b7beca;
+
+  /* Paleta dorada (global) */
+  --gold: #D4AF37;        /* brillo */
+  --gold-deep: #A57A03;   /* sombra */
+  --gold-soft: #F6E6A9;   /* brillo claro */
+  --grad-gold: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario en oro oscuro (buen contraste con #fff) */
+  --gold-700: #8A6C00;
+  --gold-800: #6B4E00;
+  --grad-gold-btn: linear-gradient(135deg, var(--gold-700), var(--gold-800));
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+html, body { height: 100%; }
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
+  /* Fondo dorado suave a juego con el logo */
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+  color: var(--txt);
+  line-height: 1.6;
+  display: flex; flex-direction: column;
+}
+
+.container{ max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ==== Header ==== */
+.site-header{
+  position: sticky; top: 0; z-index: 1000;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; min-height:64px; gap:12px; }
+
+/* Logo con degradado dorado (gradient text) */
+.logo{
+  font-weight: 700; letter-spacing:.3px; text-decoration:none; font-size: 1.15rem;
+  background: var(--grad-gold);
+  -webkit-background-clip: text; background-clip: text; /* texto relleno con el gradient */
+  color: transparent;
+}
+
+/* Nav */
+.nav{ display:flex; align-items:center; gap:10px; }
+.nav a{ color: var(--txt); text-decoration:none; padding:.5rem .75rem; border-radius:999px; }
+.nav-link:hover{ background: var(--glass); }
+
+.nav-toggle{ display:none; }
+.hamburger{ display:none; width:40px; height:40px; border-radius:12px; border:1px solid var(--border); align-items:center; justify-content:center; cursor:pointer; }
+.hamburger span{ display:block; width:20px; height:2px; background:var(--txt); margin:3px 0; border-radius:2px; }
+
+/* Botones */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.65rem 1rem; border-radius:999px; border:1px solid transparent;
+  text-decoration:none; cursor:pointer; transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  will-change: transform;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); }
+
+/* Primario: oro oscuro (contraste AA con #fff) */
+.btn-primary{
+  background: var(--grad-gold-btn);
+  color:#fff;
+  border:1px solid var(--gold);
+  box-shadow: var(--shadow);
+}
+.btn-primary:hover{ filter: brightness(1.06); }
+.btn-primary:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)); }
+
+/* Secundarios a juego */
+.btn-ghost{
+  background: rgba(255,255,255,.06);
+  color:var(--txt);
+  border:1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+}
+.btn-ghost:hover{ background: color-mix(in oklab, var(--gold) 12%, transparent); border-color: var(--gold); }
+
+.btn-lg{ padding:.9rem 1.25rem; font-size:1.05rem; }
+
+/* ==== Vista ==== */
+.auth-wrap{
+  flex:1; display:grid; place-items:center; position:relative; padding: 40px 16px;
+}
+/* blobs ahora en dorado (quitamos morado/rosa) */
+.bg-blobs{
+  position:absolute; inset:0; pointer-events:none; opacity:.42;
+  background:
+    radial-gradient(560px 380px at 20% 22%, rgba(212,175,55,.20), transparent 60%),
+    radial-gradient(600px 420px at 80% 78%, rgba(161,98,7,.16), transparent 60%);
+}
+
+/* Tarjeta */
+.login-card{
+  position: relative; z-index: 1; width: 100%; max-width: 440px;
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border:1px solid var(--border); border-radius: calc(var(--radius) + 6px);
+  padding: clamp(16px, 3.5vw, 28px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.28);
+  backdrop-filter: blur(10px);
+}
+/* halo dorado suave alrededor */
+.login-card::before{
+  content:""; position:absolute; inset:-1px; border-radius: inherit; z-index:-1;
+  background: var(--grad-gold); filter: blur(12px); opacity:.24;
+}
+
+.card-head h1{
+  font-size: clamp(1.4rem, 3.2vw, 1.8rem); line-height:1.2;
+  background: var(--grad-gold);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+/* Fallback si algún navegador no soporta background-clip:text */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  .card-head h1{ color: var(--gold); }
+}
+
+.card-head .sub{ color: var(--muted); margin-top: 2px; }
+.card-foot{ margin-top: 16px; text-align:center; color: var(--muted); }
+.card-foot .link{ color: #fff; text-decoration: none; border-bottom:1px dashed rgba(255,255,255,.25); }
+.card-foot .link:hover{ border-bottom-color: rgba(255,255,255,.6); }
+
+/* Formulario */
+.form{ display:grid; gap:14px; margin-top: 16px; }
+.input-group label{ display:block; font-size:.95rem; margin-bottom:6px; color: var(--txt); }
+.field{
+  position:relative; display:flex; align-items:center;
+  background: rgba(255,255,255,.06); border:1px solid var(--border); border-radius: 12px;
+}
+/* Focus con tinte dorado y anillo accesible */
+.field:focus-within{
+  border-color: color-mix(in oklab, var(--gold) 38%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--gold) 20%, transparent);
+}
+.field input{
+  width: 100%; background: transparent; border: 0; outline: 0;
+  color: var(--txt); padding: .9rem 44px .9rem 44px; font-size: 1rem;
+}
+.field input::placeholder{ color: color-mix(in oklab, var(--muted) 80%, transparent); }
+.field-icon{
+  position:absolute; left: 12px; display:grid; place-items:center; color: var(--muted);
+}
+
+/* Ojo contraseña */
+.toggle-pass{
+  position:absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 36px; height: 36px; border-radius: 10px;
+  border:1px solid var(--border); background: var(--glass); color: var(--txt);
+  display:grid; place-items:center; cursor:pointer;
+}
+.toggle-pass:hover{ background: rgba(255,255,255,.12); }
+.toggle-pass svg{ display:block; }
+.toggle-pass .eye-closed{ display:none; }
+.toggle-pass.is-on .eye-open{ display:none; }
+.toggle-pass.is-on .eye-closed{ display:block; }
+
+/* Mensajes */
+.notice{
+  min-height: 1.2rem; margin-bottom: 4px;
+  color: #FFD59E; /* aviso suave (ámbar) que no choca con el dorado */
+}
+
+/* Botón loading */
+#btnIngresar.is-loading{ position:relative; pointer-events:none; opacity:.9; }
+#btnIngresar.is-loading::after{
+  content:""; position:absolute; right: 14px; top:50%; transform:translateY(-50%);
+  width:16px; height:16px; border-radius:50%; border:2px solid rgba(255,255,255,.6); border-top-color: transparent;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin{ to{ transform: translateY(-50%) rotate(1turn); } }
+
+/* Footer */
+.site-footer{ margin-top: 32px; border-top: 1px solid var(--border); background: #0e0f12; }
+.footer-inner{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 18px 0; }
+.socials{ display:flex; gap:8px; }
+.social{
+  display:grid; place-items:center; width:32px; height:32px; border-radius:10px;
+  background: var(--glass); color: var(--txt); border:1px solid var(--border); font-size:.8rem;
+}
+
+/* Responsive */
+@media (max-width: 920px){
+  .hamburger{ display:flex; }
+  .nav{ position: fixed; inset: 64px 0 auto 0; background: rgba(10,10,12,.92); backdrop-filter: blur(10px);
+        padding: 16px; display:none; flex-direction:column; gap:8px; border-bottom: 1px solid var(--border); }
+  .nav a{ width: 100%; text-align: center; }
+  .nav-toggle:checked ~ .hamburger + .nav{ display:flex; }
+}
+@media (max-width: 480px){
+  .login-card{ padding: 16px; }
+}

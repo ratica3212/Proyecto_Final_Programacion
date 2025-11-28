@@ -1,0 +1,193 @@
+/* ========== Reset + Tokens (tema dorado global) ========== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+:root{
+  /* Base dark */
+  --bg: #0b0c10;
+  --surface: #121318;
+  --glass: rgba(255,255,255,.08);
+  --border: rgba(255,255,255,.12);
+  --txt: #e9ecf1;
+  --muted: #b7beca;
+
+  /* Compat (si algo antiguo usa estos) */
+  --brand: #7c5cff;
+  --brand-2: #ff2e63;
+  --grad: linear-gradient(135deg, var(--brand) 0%, #9a6bff 35%, var(--brand-2) 100%);
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* Paleta dorada global */
+  --gold: #D4AF37;         /* brillo */
+  --gold-deep: #A57A03;    /* sombra */
+  --gold-soft: #F6E6A9;    /* brillo claro */
+  --grad-gold: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario oro oscuro (mejor contraste con #fff) */
+  --gold-700: #8A6C00;
+  --gold-800: #6B4E00;
+  --grad-gold-btn: linear-gradient(135deg, var(--gold-700), var(--gold-800));
+}
+
+/* ========== Fondo y tipografía ========== */
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
+  color: var(--txt);
+
+  /* Fondo dorado suave (dos radiales + base) */
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+
+  display: flex; flex-direction: column;
+}
+.layout { display: flex; flex-direction: column; min-height: 100vh; }
+.container { width: min(1200px, 92%); margin: 0 auto; }
+
+/* ========== Header / Footer (glass) ========== */
+header, footer{
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  color: var(--txt);
+}
+footer{ border-top: 1px solid var(--border); border-bottom: none; margin-top: auto; }
+
+header .container,
+footer .container{ padding: 14px 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+footer .container{ justify-content: center; }
+
+/* ========== Títulos dorados (gradient text) ========== */
+h1, h2{
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  h1, h2{ color: var(--gold); background: none; } /* fallback sólido */
+}
+
+/* Encabezados específicos */
+h1{ margin: 0; font-size: clamp(1.1rem, 2.6vw, 1.4rem); }
+main h2{ text-align: center; margin: 1.8rem 0 1.2rem; font-size: clamp(1.3rem, 3.4vw, 1.9rem); }
+
+/* Navegación (← Atrás) */
+nav{ display: flex; justify-content: flex-end; gap: .6rem; flex-wrap: wrap; }
+nav a{
+  color: var(--txt); text-decoration: none;
+  padding: .45rem .75rem; border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  background: rgba(255,255,255,.06);
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+nav a:hover{
+  background: color-mix(in oklab, var(--gold) 14%, transparent);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+/* ========== Grid de productos ========== */
+.productos-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+  padding: 2rem 0 4rem;
+  width: 100%;
+}
+
+/* ========== Tarjeta de producto (glass + pares iguales) ========== */
+.producto-card{
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border: 1px solid var(--border);
+  color: var(--txt);
+
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+  text-align: center;
+
+  display: flex; flex-direction: column; justify-content: space-between;
+  height: 100%;
+
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.producto-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.28);
+  border-color: color-mix(in oklab, var(--gold) 28%, var(--border));
+}
+
+/* Imagen consistente (mismo recuadro en todas las cards) */
+.producto-card img{
+  width: 100%; max-width: 200px;
+  height: 200px; object-fit: cover;
+  margin: 0 auto 10px;
+  border-radius: 12px;
+  background: #0f1116;
+  border: 1px solid var(--border);
+}
+
+/* Texto e info */
+.contenido-producto{ flex-grow: 1; }
+.contenido-producto h3,
+.contenido-producto .titulo{ color: var(--txt); }
+.contenido-producto .precio{ color: #fff; font-weight: 800; }
+
+/* Cantidad */
+.cantidad-bloque{
+  display: flex; flex-direction: column; align-items: center;
+  gap: .5rem; margin-top: .5rem;
+}
+.cantidad-input{
+  width: 100px; padding: .3rem; text-align: center;
+  border-radius: 8px; border: 1px solid var(--border);
+  background: #0f1116; color: var(--txt);
+}
+
+/* ========== Botones dentro de la tarjeta ========== */
+.producto-card .btn,
+.producto-card button{
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .6rem .95rem; border-radius: 12px; cursor: pointer;
+  border: 1px solid transparent; text-decoration: none; color: #fff;
+  background: var(--grad-gold-btn);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, filter .15s ease, border-color .15s ease;
+}
+.producto-card .btn:hover,
+.producto-card button:hover{
+  transform: translateY(-1px); filter: brightness(1.06); border-color: var(--gold);
+}
+.producto-card .btn:focus-visible,
+.producto-card button:focus-visible{
+  outline: 2px solid var(--gold); outline-offset: 2px;
+}
+.producto-card .btn:active,
+.producto-card button:active{
+  background: linear-gradient(135deg, var(--gold-800), var(--gold-800));
+}
+
+/* Variante ghost si la necesitas */
+.producto-card .btn-ghost{
+  background: rgba(255,255,255,.06);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  color: var(--txt);
+}
+.producto-card .btn-ghost:hover{
+  background: color-mix(in oklab, var(--gold) 12%, transparent);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+/* ========== Responsivo ========== */
+@media (max-width: 768px){
+  header .container, footer .container{ flex-direction: column; gap: 6px; text-align: center; }
+  nav{ justify-content: center; gap: .5rem; }
+  .productos-grid{ grid-template-columns: 1fr; gap: 3.5rem; padding: 1rem 0 3rem; }
+  h1, h2{ font-size: 20px; }
+  .cantidad-input{ width: 80px; }
+}

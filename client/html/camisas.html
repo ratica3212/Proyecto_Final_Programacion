@@ -1,0 +1,63 @@
+<!-- Define el tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Indica que el idioma del documento es español -->
+<html lang="es">
+
+<head>
+  <!-- Define la codificación de caracteres como UTF-8 -->
+  <meta charset="UTF-8" />
+
+  <!-- Configura la vista para dispositivos móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Título que aparecerá en la pestaña del navegador -->
+  <title>Camisas - Tienda de Ropa</title>
+
+  <!-- Enlace al archivo de estilos específico para esta página -->
+  <link rel="stylesheet" href="../css/camisas.css" />
+</head>
+
+<body>
+  <!-- Contenedor principal para estructurar el diseño vertical -->
+  <div class="layout">
+
+    <!-- Sección de encabezado con título y navegación -->
+    <header>
+      <div class="container">
+        <!-- Nombre de la tienda -->
+        <h1>Tienda de Ropa</h1>
+
+        <!-- Navegación para volver al catálogo principal -->
+        <nav>
+          <a href="catalogo.html">← Atrás</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Sección principal del contenido -->
+    <main>
+      <div class="container">
+        <!-- Título de sección -->
+        <h2>Camisas disponibles</h2>
+
+        <!-- Contenedor donde se mostrarán las tarjetas de productos dinámicamente -->
+        <div id="productos-container" class="productos-grid">
+          <!-- Productos se insertan dinámicamente -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Pie de página con derechos reservados -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Tienda de Ropa.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Script que carga y muestra las camisas desde el backend -->
+  <script src="../js/camisas.js"></script>
+</body>
+
+</html>

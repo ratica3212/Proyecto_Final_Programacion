@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Pedidos - Tienda de Ropa</title>
+  <link rel="stylesheet" href="../css/misPedidos.css" />
+  <meta name="theme-color" content="#0e0f12" />
+</head>
+
+<body>
+  <!-- HEADER: mismo contenido, solo clases para estilizar -->
+  <header class="site-header">
+    <div class="container header-flex">
+      <h1 class="logo">Tienda de Ropa EM</h1>
+      <nav class="nav">
+        <a href="catalogo.html" class="nav-link">Catálogo</a>
+        
+        <a href="/" id="logout" class="btn btn-outline">Cerrar sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Mi cuenta</p>
+      <h2>Mis pedidos</h2>
+      <p class="sub">Consulta el estado, fecha y total de tus pedidos.</p>
+    </div>
+  </section>
+
+  <!-- LISTA (tu JS inyecta aquí las tarjetas) -->
+  <main class="container">
+    <div id="pedidos-container" class="pedido-grid" aria-live="polite"></div>
+    <!-- Si tu JS quiere, puede inyectar un "empty state" con <div class="empty">...</div> -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Tienda de Ropa.</p>
+    </div>
+  </footer>
+
+  <script src="../js/misPedidos.js"></script>
+</body>
+</html>

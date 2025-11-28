@@ -1,0 +1,170 @@
+/* RESET Y CONFIGURACIÓN GLOBAL */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  font-family: "Poppins", sans-serif;
+
+  background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+  color: #E6C880;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ESTRUCTURA PRINCIPAL */
+main.container {
+  flex: 1;
+  padding: 2rem;
+  background: #0E0E0E;
+  margin: 2rem auto;
+
+  width: 90%;
+  max-width: 1000px;
+
+  border-radius: 10px;
+  border: 1px solid #D4AF37;
+  box-shadow: 0 0 15px rgba(212,175,55,0.25);
+}
+
+/* FOOTER */
+footer {
+  background-color: #0A0A0A;
+  color: #E6C880;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #D4AF37;
+  z-index: 1000;
+}
+
+/* HEADER */
+header {
+  background-color: #111;
+  color: #E6C880;
+  padding: 1rem 0;
+  border-bottom: 2px solid #D4AF37;
+  box-shadow: 0 0 10px rgba(212,175,55,0.3);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+header nav a {
+  color: #E6C880;
+  margin-left: 1rem;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+header nav a:hover {
+  color: #F6E6A9;
+  text-shadow: 0 0 6px rgba(212,175,55,0.6);
+}
+
+/* TABLA (SOLO ESCRITORIO) */
+.only-desktop {
+  display: table;
+}
+
+.only-mobile {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  color: #EAD9A4;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid rgba(212,175,55,0.35);
+  text-align: center;
+}
+
+th {
+  background: rgba(212,175,55,0.20);
+  color: #F6E6A9;
+  font-weight: bold;
+}
+
+/* RESPONSIVE: MÓVIL */
+@media (max-width: 768px) {
+
+  .only-desktop {
+    display: none;
+  }
+
+  .only-mobile {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  .pedido-card {
+    background: #0D0D0D;
+    border: 1px solid #D4AF37;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 0 10px rgba(212,175,55,0.15);
+  }
+
+  .pedido-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem;
+
+    background: linear-gradient(135deg, #F6E6A9, #D4AF37, #A57A03);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .pedido-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    padding: 0 6px;
+
+    color: #EAD9A4;
+  }
+
+  .pedido-item strong {
+    width: auto;
+    min-width: 70px;
+    flex-shrink: 0;
+    font-weight: bold;
+    color: #F6E6A9;
+  }
+
+  .pedido-item .fecha {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    text-align: right;
+  }
+
+  main.container {
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+}

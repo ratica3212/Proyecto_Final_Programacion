@@ -1,0 +1,202 @@
+/* ================== Reset & tokens ================== */
+*{ box-sizing:border-box; margin:0; padding:0 }
+html,body{ min-height:100% }
+
+:root{
+  /* Base oscura + tipografía */
+  --bg:#0b0c10;
+  --surface:#121318;
+  --txt:#e9ecf1;
+  --muted:#b7beca;
+  --border:rgba(255,255,255,.12);
+  --glass:rgba(255,255,255,.08);
+
+  /* Paleta dorada */
+  --gold:#D4AF37;
+  --gold-deep:#A57A03;
+  --gold-soft:#F6E6A9;
+  --grad-gold:linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario en oro oscuro (contraste con #fff) */
+  --gold-700:#8A6C00; --gold-800:#6B4E00;
+  --grad-gold-btn:linear-gradient(135deg, var(--gold-700), var(--gold-800));
+
+  --radius:16px;
+  --shadow:0 14px 36px rgba(0,0,0,.30);
+}
+
+/* Fondo con halos dorados + layout base */
+body{
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans";
+  color:var(--txt);
+  display:flex; flex-direction:column;
+
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+}
+
+/* Orbes flotando de fondo */
+.bg-orbs{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(360px 280px at 12% 24%, rgba(234,179,8,.12), transparent 60%),
+    radial-gradient(420px 320px at 88% 78%, rgba(180,83,9,.10), transparent 60%);
+  animation: floatOrbs 16s ease-in-out infinite alternate;
+  filter:saturate(1.05);
+}
+@keyframes floatOrbs{ from{ transform:translate3d(0,0,0) } to{ transform:translate3d(0,-10px,0) } }
+/* Accesibilidad: menos movimiento si el usuario lo pide */
+@media (prefers-reduced-motion: reduce){ .bg-orbs{ animation:none } } /* :contentReference[oaicite:0]{index=0} */
+
+/* ================== Contenedores ================== */
+.container{ width:min(1200px,92%); margin:0 auto }
+.content{ padding: 8px 0 36px }
+
+/* ================== Header glass sticky ================== */
+.site-header{
+  position:sticky; top:0; z-index:1000;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  border-bottom:1px solid var(--border);
+  backdrop-filter: blur(10px); /* requiere fondo semi-transparente */ /* :contentReference[oaicite:1]{index=1} */
+}
+.header-inner{ min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:12px }
+.logo{
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+  font-weight:800; letter-spacing:.3px;
+  background: var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.nav{ display:flex; gap:10px; align-items:center }
+.nav-link{
+  color:var(--txt); text-decoration:none; padding:.5rem .75rem; border-radius:999px; border:1px solid transparent;
+}
+.nav-link:hover{ background:var(--glass) }
+
+/* ================== Hero ================== */
+.hero{ padding: 18px 0 6px }
+.page-title{
+  font-size: clamp(1.2rem, 3.2vw, 1.6rem);
+  background: var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.sub{ color:var(--muted) }
+
+/* ================== Tarjetas (glass) ================== */
+.card{
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border:1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+  padding: clamp(16px, 3vw, 24px);
+  backdrop-filter: blur(10px);
+  margin: 14px 0;
+  animation: fadeInUp .5s ease both;
+  will-change: transform, opacity; /* úsalo con moderación */ /* :contentReference[oaicite:2]{index=2} */
+}
+@keyframes fadeInUp{ from{ opacity:0; transform: translateY(6px) } to{ opacity:1; transform:none } }
+.card-title{ margin-bottom: 10px; font-size: 1.05rem; background: var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent }
+
+/* ================== Formulario ================== */
+.form-grid{
+  display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px;
+}
+.field{ grid-column: span 6; display:flex; flex-direction:column; gap:6px }
+.field--wide{ grid-column: span 12 }
+.field label{ font-size:.95rem; color:var(--txt) }
+.field input, .field textarea, .field select{
+  border:1px solid var(--border); border-radius:12px; background: rgba(255,255,255,.06);
+  color:var(--txt); padding:.85rem .9rem; outline:0; font-size:1rem;
+}
+.field textarea{ resize: vertical; min-height: 80px }
+.field input::placeholder, .field textarea::placeholder{ color: color-mix(in oklab, var(--muted) 80%, transparent) } /* :contentReference[oaicite:3]{index=3} */
+.field :is(input,textarea,select):focus{
+  border-color: color-mix(in oklab, var(--gold) 38%, transparent);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--gold) 18%, transparent);
+}
+
+/* Grupo de imagen */
+.grupo-imagen{ border:1px dashed color-mix(in oklab, var(--gold) 35%, var(--border)); border-radius:14px; padding:12px }
+.grupo-imagen legend{ padding:0 6px; color:var(--txt) }
+.opciones-imagen{ display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 8px }
+.radio-pill{
+  display:inline-flex; align-items:center; gap:8px; padding:.35rem .6rem; border-radius:999px; cursor:pointer;
+  border:1px solid color-mix(in oklab, var(--gold) 45%, transparent); background: rgba(255,255,255,.06); user-select:none;
+}
+.radio-pill input{ accent-color: var(--gold) }
+.fila{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+#preview{ max-height: 88px; border-radius:12px; border:1px solid var(--border); display:none; background:#0f1116 }
+
+/* Acciones */
+.acciones{ grid-column: span 12; display:flex; justify-content:flex-end }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.7rem 1.05rem; border-radius:12px; border:1px solid transparent; cursor:pointer;
+  font-weight:800; transition: transform .15s ease, filter .15s ease, border-color .15s ease;
+}
+.btn:hover{ transform: translateY(-1px) }
+.btn:active{ transform:none }
+.btn-primary{
+  background: var(--grad-gold-btn); color:#fff; border:1px solid var(--gold); box-shadow: var(--shadow)
+}
+.btn-primary:hover{ filter: brightness(1.06) }
+.btn-primary:focus-visible{ outline:2px solid var(--gold); outline-offset:2px }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)) }
+
+.mensaje{ margin-top: 8px; color:#FFD59E }
+/* Fuerza controles nativos oscuros (incluye el pop-up del <select>) */
+:root { color-scheme: dark; }             /* aplica a toda la página */
+/* o solo donde te interese: .card, .field select { color-scheme: dark; } */
+
+/* Estilo del control (cerrado) para que combine con tu tema */
+.field select{
+  background-color:#0f1116;   /* mismo fondo que tus inputs */
+  color:#e9ecf1;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+/* En navegadores que sí lo permiten, también colorea las opciones */
+.field select option{
+  background-color:#0f1116;
+  color:#e9ecf1;
+}
+.field select option:checked{
+  background-color:#1f2a37;
+  color:#fff;
+}
+
+/* ================== Tabla ================== */
+.table-wrap{
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius: 14px;
+  overflow: auto;
+}
+.datatable{ width:100%; border-collapse: collapse; min-width: 720px }
+.datatable thead th{
+  position: sticky; top: 0; z-index: 1; /* cabecera sticky */
+  background: #0f1116; color:#fff; border-bottom:1px solid var(--border);
+  padding: 12px 14px; text-align: left; font-weight:800; letter-spacing:.2px;
+} /* position: sticky es válido para cabeceras en contenedor con scroll. */ /* :contentReference[oaicite:4]{index=4} */
+.datatable tbody td{ padding: 12px 14px; border-bottom:1px solid var(--border) }
+.datatable tbody tr{ animation: rowIn .4s ease both }
+@keyframes rowIn{ from{ opacity:0; transform: translateY(6px) } to{ opacity:1; transform:none } }
+@media (prefers-reduced-motion: reduce){ .datatable tbody tr{ animation:none } } /* :contentReference[oaicite:5]{index=5} */
+.datatable tbody tr:hover{ background: rgba(255,255,255,.04) }
+.datatable tbody tr:nth-child(even){ background: rgba(255,255,255,.02) }
+
+/* ================== Footer ================== */
+.site-footer{ margin-top:auto; border-top:1px solid var(--border); background:#0e0f12 }
+.footer-inner{ display:flex; align-items:center; justify-content:center; padding:18px 0; color:var(--muted) }
+
+/* ================== Responsive ================== */
+@media (max-width: 920px){
+  .form-grid{ grid-template-columns: repeat(6, 1fr) }
+  .field{ grid-column: span 6 }
+  .field--wide{ grid-column: span 6 }
+  .acciones{ justify-content: stretch }
+  .btn{ width: 100% }
+}
+@media (max-width: 640px){
+  .datatable{ min-width: 640px }
+}

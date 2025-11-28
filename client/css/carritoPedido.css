@@ -1,0 +1,322 @@
+/* ================== Reset & base ================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100vh; width: 100%; overflow-x: hidden; }
+
+/* ====== Tokens del tema (alineados con el resto del sitio) ====== */
+:root{
+  /* Base dark */
+  --bg:#0b0c10;
+  --surface:#121318;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.12);
+  --txt:#e9ecf1;
+  --muted:#b7beca;
+
+  /* Compat (si algo aún usa los morados) */
+  --brand:#7c5cff;
+  --brand-2:#ff2e63;
+  --grad:linear-gradient(135deg, var(--brand) 0%, #9a6bff 35%, var(--brand-2) 100%);
+
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+
+  /* Paleta dorada global */
+  --gold:#D4AF37;          /* brillo */
+  --gold-deep:#A57A03;     /* sombra */
+  --gold-soft:#F6E6A9;     /* brillo claro */
+  --grad-gold:linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario en oro oscuro (mejor contraste con blanco) */
+  --gold-700:#8A6C00;
+  --gold-800:#6B4E00;
+  --grad-gold-btn:linear-gradient(135deg, var(--gold-700), var(--gold-800));
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
+  color: var(--txt);
+
+  /* FONDO DORADO (dos radial + base) */
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+
+  display: flex; flex-direction: column;
+}
+
+.container { width: min(1200px, 92%); margin: 0 auto; }
+
+/* ================== Header / Footer ================== */
+.site-header{
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--border);
+  position: sticky; top:0; z-index: 1000;
+}
+.header-inner { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 18px 0; }
+
+/* Marca en dorado (gradient text) */
+.brand {
+  font-size: 1.15rem; font-weight: 800; letter-spacing:.3px;
+  background: var(--grad-gold);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+}
+
+/* Link volver con estilo pill, a juego */
+.nav-back {
+  color: var(--txt); text-decoration: none; padding:.45rem .7rem; border-radius:999px;
+  border:1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  background: rgba(255,255,255,.06);
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.nav-back:hover {
+  background: color-mix(in oklab, var(--gold) 14%, transparent);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.site-footer { margin-top: auto; border-top:1px solid var(--border); background:#0e0f12; color: #b7beca; }
+.site-footer .container { padding: 18px 0; text-align: center; }
+
+/* sangrado a bordes */
+.site-header, .site-footer {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* ================== Título ================== */
+.page-title {
+  margin: 28px 0 16px; font-size: 1.9rem; font-weight: 800;
+  background: var(--grad-gold);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+/* Fallback si algún navegador no soporta background-clip:text */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  .brand, .page-title { color: var(--gold); background: none; }
+}
+
+/* ================== Layout carrito (desktop) ================== */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;  /* lista + resumen */
+  gap: 28px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+
+/* ================== Lista de ítems ================== */
+.cart-items {
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+
+.item-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px 1fr 160px 120px 32px; /* img | info | qty | subtotal | x */
+  gap: 12px;
+  align-items: center;
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--border);
+}
+.item-row:last-child { border-bottom: 0; }
+.item-row:hover{ background: rgba(255,255,255,.03); }
+
+/* Media */
+.item-media { display: flex; align-items: center; justify-content: center; }
+.item-thumb {
+  width: 56px; height: 56px; min-width: 56px;
+  object-fit: cover; border-radius: 10px; background: #0f1116; border: 1px solid var(--border);
+}
+
+/* Info */
+.item-info .item-title { font-weight: 700; margin-bottom: 4px; }
+.item-info .item-price { color: var(--muted); font-size: .95rem; }
+
+/* Qty (patrón botones +/- + input) */
+.item-qty { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.qty-btn {
+  width: 32px; height: 32px; border: 1px solid var(--border); background: var(--glass); border-radius: 10px;
+  font-size: 18px; line-height: 1; cursor: pointer; color: var(--txt);
+  transition: transform .1s ease, background .15s ease, border-color .15s ease;
+}
+.qty-btn:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
+.qty-btn:active { transform: translateY(0); }
+.qty-btn:focus-visible{
+  outline:2px solid color-mix(in oklab, var(--gold) 55%, white);
+  outline-offset:2px;
+}
+
+.qty-input {
+  width: 44px; height: 32px; border: 1px solid var(--border); border-radius: 10px; text-align: center;
+  background: #0f1116; color: var(--txt); font-weight: 700;
+}
+
+/* Subtotal */
+.item-subtotal { text-align: right; font-weight: 800; }
+
+/* ====== Botón eliminar (con ícono SVG) ====== */
+.item-remove {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border: 0; background: transparent; border-radius: 10px;
+  color: var(--txt); cursor: pointer; font-size: 0;
+  transition: background .15s ease, transform .08s ease;
+}
+.item-remove svg { width: 18px; height: 18px; display: block; }
+.item-remove:hover { background: rgba(255,255,255,.10); }
+.item-remove:active { transform: scale(.98); }
+.item-remove:focus-visible{
+  outline:2px solid color-mix(in oklab, var(--gold) 55%, white);
+  outline-offset:2px;
+}
+
+/* ================== Resumen ================== */
+.cart-summary {
+  position: sticky; top: 18px;
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+.cart-summary h3 {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 800;
+  background: var(--grad-gold);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  .cart-summary h3{ color: var(--gold); background: none; }
+}
+
+.summary-row,
+.summary-total {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0; font-size: 1rem;
+  color: var(--txt);
+}
+.summary-divider { height: 1px; background: var(--border); margin: 8px 0; }
+.summary-total { font-weight: 900; font-size: 1.15rem; }
+
+/* CTA primaria (Realizar Pedido) */
+.btn-primary {
+  width: 100%; margin-top: 14px; padding: 12px 14px;
+  border: 0; border-radius: 12px;
+  background: var(--grad-gold-btn); color: #fff; font-weight: 800; cursor: pointer;
+  box-shadow: var(--shadow); transition: transform .15s ease, filter .15s ease;
+  border: 1px solid var(--gold);
+}
+.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.btn-primary:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)); }
+
+.note { margin-top: 10px; font-size: .9rem; color: var(--muted); }
+
+/* ================== Carrito vacío ================== */
+.cart-empty {
+  margin: 24px 0 40px; text-align: center;
+  background: rgba(255,255,255,.04);
+  border: 1px dashed var(--border);
+  border-radius: 14px; padding: 20px; color: var(--muted);
+}
+.btn-link { display: inline-block; margin-top: 8px; text-decoration: none; color: var(--txt); font-weight: 700; }
+.btn-link:hover { text-decoration: underline; }
+
+/* ================== Responsive ================== */
+
+/* Tablet y abajo: una columna y sin sticky */
+@media (max-width: 980px) {
+  .cart-layout { grid-template-columns: 1fr; gap: 16px; }
+  .cart-summary { position: static; }
+}
+
+/* Móvil: contenedor 100% y tipografía algo menor */
+@media (max-width: 768px) {
+  .container { width: 100%; max-width: none; padding-left: 14px; padding-right: 14px; }
+  .header-inner, .site-footer .container { padding-left: 14px; padding-right: 14px; }
+  .page-title { margin: 18px 0 12px; font-size: 1.6rem; }
+}
+
+/* ===== MÓVIL: imagen a la izquierda, detalles a la derecha ===== */
+@media (max-width: 620px) {
+  /* tarjeta en 2 columnas: [img] [info/qty/subtotal] */
+  .item-row {
+    position: relative;
+    grid-template-columns: 104px 1fr;
+    grid-template-areas:
+      "media   remove"
+      "media   info"
+      "media   qty"
+      "media   subtotal";
+    gap: 10px 12px;
+    padding: 12px 12px;
+    align-items: start;
+  }
+
+  .item-media   { grid-area: media; display: flex; justify-content: center; }
+  .item-thumb   {
+    width: 96px; height: 96px; min-width: 96px;
+    object-fit: cover; border-radius: 12px; background:#0f1116;
+  }
+
+  .item-remove  {
+    grid-area: remove;
+    position: absolute; top: 8px; right: 8px;
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--surface); color: var(--txt); box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  }
+  .item-remove svg { width: 22px; height: 22px; }
+
+  .item-info      { grid-area: info; }
+  .item-info .item-title { font-size: 1.02rem; }
+  .item-info .item-price { font-size: .92rem; color: var(--muted); }
+
+  .item-qty       { grid-area: qty; justify-content: flex-start; gap: 6px; }
+  .qty-btn        { width: 28px; height: 28px; font-size: 16px; }
+  .qty-input      { width: 40px; height: 28px; font-weight: 700; background:#0f1116; color:var(--txt); }
+
+  .item-subtotal  { grid-area: subtotal; text-align: left; font-size: .98rem; font-weight: 800; }
+
+  .cart-summary {
+    padding: 14px;
+    width: min(460px, 100%);
+    margin-left: auto; margin-right: auto;
+  }
+  .cart-summary h3 { text-align: center; }
+  .summary-row, .summary-total { font-size: .97rem; column-gap: 12px; }
+  .summary-row span:last-child, .summary-total span:last-child {
+    margin-left: auto; text-align: right; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; max-width: 58%;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+  html { font-size: 15px; }
+  .container { padding-left: 12px; padding-right: 12px; }
+  .header-inner, .site-footer .container { padding-left: 12px; padding-right: 12px; }
+
+  .item-thumb { width: 88px; height: 88px; min-width: 88px; }
+  .item-remove { width: 36px; height: 36px; }
+  .item-remove svg { width: 22px; height: 22px; }
+  .summary-row span:last-child, .summary-total span:last-child { max-width: 62%; }
+}
+
+/* Móvil muy estrecho */
+@media (max-width: 360px) {
+  html { font-size: 14px; }
+  .item-thumb { width: 84px; height: 84px; min-width: 84px; }
+  .qty-btn { width: 24px; height: 24px; font-size: 14px; }
+  .qty-input { width: 34px; height: 24px; }
+  .summary-row span:last-child, .summary-total span:last-child { max-width: 66%; }
+}
+
+/* Evitar cortes por textos largos/números */
+.item-title, .summary-row span, .summary-total span { min-width: 0; word-break: break-word; }

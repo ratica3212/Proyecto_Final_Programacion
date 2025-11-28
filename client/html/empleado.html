@@ -1,0 +1,95 @@
+<!-- Declaración del tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Lenguaje principal de la página: Español -->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres para soporte UTF-8 -->
+  <meta charset="UTF-8" />
+
+  <!-- Configuración para diseño responsivo en móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Título que aparecerá en la pestaña del navegador -->
+  <title>Panel del Empleado</title>
+
+  <!-- Enlace al archivo CSS específico para esta vista -->
+  <link rel="stylesheet" href="../css/empleado.css" />
+</head>
+
+<body>
+  <!-- Encabezado principal del panel del empleado -->
+  <header>
+    <div class="container">
+      <!-- Título de la página -->
+      <h1>Panel del Empleado</h1>
+
+      <!-- Menú de navegación -->
+      <nav>
+        <!-- Enlace para ver pedidos ya entregados -->
+        <a href="pedidosEntregados.html" id="verEntregados" style="margin-right: 1rem;">Ver Entregados</a>
+
+        <!-- Enlace para cerrar sesión -->
+        <a href="/" id="logout">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal del panel -->
+  <main class="container">
+    <!-- Título de la sección principal -->
+    <h2>Pedidos Pendientes de Entrega</h2>
+
+    <!-- Tabla visible en escritorio para mostrar pedidos pendientes -->
+    <table id="tabla-pedidos" class="only-desktop">
+      <thead>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Dirección</th>
+          <th>Estado Pago</th>
+          <th>Estado Entrega</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <!-- El contenido de la tabla se insertará dinámicamente con JavaScript -->
+      <tbody></tbody>
+    </table>
+
+    <!-- Contenedor tipo cards para dispositivos móviles -->
+    <div id="cards-pedidos" class="only-mobile cards-container"></div>
+  </main>
+
+  <!-- Pie de página con información de derechos -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Tienda de Ropa. Panel del Empleado.</p>
+    </div>
+  </footer>
+
+  <!-- Script para validar token (autenticación) -->
+  <script>
+    // Verifica si hay token en localStorage; si no, redirige al login
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = '/html/IniciarSesion.html';
+
+    // Eventos del DOM cargado
+    document.addEventListener('DOMContentLoaded', () => {
+      // Evento para cerrar sesión
+      document.getElementById('logout').addEventListener('click', () => {
+        localStorage.clear();
+        window.location.href = '/';
+      });
+
+      // Evento para redirigir al historial de pedidos entregados
+      document.getElementById('verEntregados').addEventListener('click', () => {
+        window.location.href = '/html/pedidosEntregados.html';
+      });
+    });
+  </script>
+
+  <!-- Script que maneja la lógica de esta vista (mostrar pedidos, acciones, etc.) -->
+  <script src="../js/empleado.js" defer></script>
+</body>
+</html>

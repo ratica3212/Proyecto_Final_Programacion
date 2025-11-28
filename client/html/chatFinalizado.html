@@ -1,0 +1,60 @@
+<!-- Declaración del tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Idioma principal del contenido: español -->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres compatible con caracteres especiales -->
+  <meta charset="UTF-8" />
+
+  <!-- Permite diseño adaptable a pantallas móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Título que aparece en la pestaña del navegador -->
+  <title>Chat Finalizado</title>
+
+  <!-- Enlace al archivo CSS que contiene los estilos del chat -->
+  <link rel="stylesheet" href="../css/chatFinalizado.css" />
+</head>
+
+<body>
+  <!-- Encabezado principal de la página -->
+  <header>
+    <div class="container">
+      <!-- Título visible en el encabezado -->
+      <h1>Detalle de Chat Finalizado</h1>
+
+      <!-- Menú de navegación superior -->
+      <nav>
+        <!-- Enlace para volver al listado de chats finalizados -->
+        <a href="/html/chatsFinalizados.html">← Volver</a>
+
+        <!-- Enlace para cerrar sesión del usuario actual -->
+        <a href="/" id="cerrar-sesion">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal de la página -->
+  <main class="container">
+    <!-- Sección donde se mostrará el detalle del chat finalizado -->
+    <section id="detalle-chat">
+      <!-- Título dinámico de la conversación -->
+      <h2 id="titulo-chat">Conversación</h2>
+
+      <!-- Contenedor donde se renderizan los mensajes del chat -->
+      <div id="mensajes-chat"></div>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Tienda de Ropa - Soporte.</p>
+    </div>
+  </footer>
+
+  <!-- Script JavaScript que gestiona la carga y visualización del chat finalizado -->
+  <script src="../js/chatFinalizado.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="../css/admin.css" />
+</head>
+
+<body>
+  <div class="bg-orbs" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">Administrador — Usuarios Registrados</h1>
+
+      <nav class="nav">
+        <a class="nav-link" href="catalogo.html">Ir a Catálogo</a>
+        <a class="nav-link btn-outline" id="logout" href="/">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container content">
+    <div class="toolbar">
+      <h2 class="page-title">Lista de Usuarios</h2>
+      <button class="btn btn-primary" onclick="window.location.href='agregarProducto.html'">
+        Agregar nuevo producto
+      </button>
+    </div>
+
+    <div class="table-wrap">
+      <table id="tabla-usuarios" class="datatable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; 2025 Tienda de Ropa. Panel de Administración.</p>
+    </div>
+  </footer>
+
+  <!-- Modal: ahora empieza oculto por CSS (display:none) -->
+  <div id="modal-editar" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content" tabindex="-1">
+      <h3 id="modalTitle" class="modal-title">Editar Usuario</h3>
+
+      <form id="form-editar">
+        <input type="hidden" name="id" />
+
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required />
+
+        <label>Correo:</label>
+        <input type="email" name="correo" required />
+
+        <label>Rol:</label>
+        <select name="rol" required>
+          <option value="usuario">Usuario</option>
+          <option value="empleado">Empleado</option>
+          <option value="admin">Administrador</option>
+        </select>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="button" class="btn btn-ghost" onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Resetea el modal al cargar o volver desde el historial (bfcache) -->
+  <script>
+    window.addEventListener('pageshow', function () {
+      var m = document.getElementById('modal-editar');
+      if (!m) return;
+      // Si tu JS lo abre con .classList, lo quitamos:
+      m.classList.remove('is-open');
+      // Si lo abre con style.display = 'flex', lo cerramos:
+      m.style.display = 'none';
+      // opcional: enfoque al principio si se requiere
+    });
+  </script>
+
+  <script src="../js/admin.js"></script>
+</body>
+</html>

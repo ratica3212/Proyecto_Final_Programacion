@@ -1,0 +1,74 @@
+<!-- Declaración del tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Inicio del documento HTML en español -->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres para compatibilidad con acentos y caracteres especiales -->
+  <meta charset="UTF-8" />
+
+  <!-- Configuración responsive para que se adapte a dispositivos móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Título que se muestra en la pestaña del navegador -->
+  <title>Pedidos Entregados</title>
+
+  <!-- Enlace a la hoja de estilos específica de esta página -->
+  <link rel="stylesheet" href="../css/pedidosEntregados.css" />
+</head>
+
+<body>
+  <!-- Encabezado de la página con navegación -->
+  <header>
+    <div class="container">
+      <!-- Título principal del encabezado -->
+      <h1>Pedidos Entregados</h1>
+
+      <!-- Enlaces de navegación -->
+      <nav>
+        <!-- Enlace para volver al panel del empleado -->
+        <a href="empleado.html">← Volver</a>
+        
+        <!-- Enlace para cerrar sesión -->
+        <a href="/" id="logout">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal de la página -->
+  <main class="container">
+    <!-- Subtítulo de la sección -->
+    <h2>Historial de Entregas</h2>
+
+    <!-- Tabla para mostrar pedidos en formato de escritorio -->
+    <table id="tabla-entregados" class="only-desktop">
+      <thead>
+        <tr>
+          <th>ID Pedido</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Estado Pago</th>
+          <th>Estado Entrega</th>
+        </tr>
+      </thead>
+      <!-- Cuerpo de la tabla que será llenado dinámicamente con JavaScript -->
+      <tbody></tbody>
+    </table>
+
+    <!-- Contenedor para mostrar pedidos como tarjetas en dispositivos móviles -->
+    <div id="cards-entregados" class="only-mobile"></div>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <div class="container">
+      <!-- Texto de derechos de autor -->
+      <p>&copy; 2025 Tienda de Ropa. Panel del Empleado.</p>
+    </div>
+  </footer>
+
+  <!-- Enlace al script que carga los pedidos entregados usando JavaScript -->
+  <script src="../js/pedidosEntregados.js" defer></script>
+</body>
+</html>

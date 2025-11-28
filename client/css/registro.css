@@ -1,0 +1,210 @@
+/* ============= Reset & Variables ============= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  /* Base dark */
+  --bg: #0b0c10;
+  --surface: #121318;
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+  --txt: #e9ecf1;
+  --muted: #b7beca;
+
+  /* Compat morado si algo lo usa todavía */
+  --brand: #7c5cff;
+  --brand-2: #ff2e63;
+  --grad: linear-gradient(135deg, var(--brand) 0%, #9a6bff 35%, var(--brand-2) 100%);
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* Paleta dorada global */
+  --gold: #D4AF37;
+  --gold-deep: #A57A03;
+  --gold-soft: #F6E6A9;
+  --grad-gold: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario en oro oscuro (contraste con #fff) */
+  --gold-700: #8A6C00;
+  --gold-800: #6B4E00;
+  --grad-gold-btn: linear-gradient(135deg, var(--gold-700), var(--gold-800));
+}
+
+html, body { height: 100%; }
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+  color: var(--txt);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+.container{ max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ============= Header Sticky + safe-area ============= */
+.site-header{
+  position: sticky; top: 0; z-index: 1000;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding-top: max(0px, env(safe-area-inset-top)); /* notch-safe */
+}
+.header-inner{ display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 12px; }
+
+/* LOGO en dorado */
+.logo{
+  font-weight: 700; letter-spacing: .3px; text-decoration: none; font-size: 1.15rem;
+  background: var(--grad-gold);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+/* Navegación */
+.nav{ display: flex; align-items: center; gap: 10px; }
+.nav a{ color: var(--txt); text-decoration: none; padding: .5rem .75rem; border-radius: 999px; }
+.nav-link:hover{ background: var(--glass); }
+
+/* Toggle/Hamburger (para móvil) */
+.nav-toggle{ position:absolute; width:1px; height:1px; clip:rect(0 0 0 0); clip-path: inset(50%); overflow:hidden; }
+.hamburger{
+  display:none; width:40px; height:40px; border-radius:12px; border:1px solid var(--border);
+  align-items:center; justify-content:center; cursor:pointer;
+}
+.hamburger span{ display:block; width:20px; height:2px; background:var(--txt); margin:3px 0; border-radius:2px; }
+
+/* ============= Botones (oro) ============= */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding: .65rem 1rem; border-radius: 999px; border: 1px solid transparent;
+  text-decoration:none; cursor:pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn:active{ transform: translateY(0); }
+
+.btn-primary{
+  background: var(--grad-gold-btn);
+  color: #fff;
+  border: 1px solid var(--gold);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+.btn-primary:hover{ filter: brightness(1.06); }
+.btn-primary:focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)); }
+
+.btn-outline{
+  background: transparent;
+  border-color: color-mix(in oklab, var(--gold) 55%, transparent);
+  color: #e9ecf1;
+}
+.btn-outline:hover{ background: color-mix(in oklab, var(--gold) 14%, transparent); border-color: var(--gold); }
+
+.btn-ghost{
+  background: rgba(255,255,255,.06);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  color: #e9ecf1;
+}
+.btn-ghost:hover{ background: color-mix(in oklab, var(--gold) 12%, transparent); border-color: var(--gold); }
+
+.btn-lg{ padding: .9rem 1.25rem; font-size: 1.05rem; }
+
+/* Link activo opcional */
+.nav .nav-link[aria-current="page"], .nav .nav-link.active{
+  color: #fff;
+  background: rgba(255,255,255,.10);
+  border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+}
+
+/* ============= TÍTULOS DORADOS ============= */
+h1, h2, h3, .page-title, h1.section-title, h2.section-title{
+  background: var(--grad-gold);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  h1, h2, h3, .page-title, h1.section-title, h2.section-title{ color: var(--gold); }
+}
+
+/* ============= Form Card ============= */
+.main-wrap{ padding: 24px 0 32px; }
+.registro-card{
+  width: 100%; max-width: 520px; margin: 0 auto;
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: var(--shadow);
+  padding: clamp(16px, 3.2vw, 28px);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+.registro-card::before{
+  content:""; position:absolute; inset:-1px; border-radius: inherit; z-index:-1;
+  background: var(--grad-gold); filter: blur(12px); opacity:.22;
+}
+.registro-card h2{ margin-bottom: 10px; }
+
+.notice{ min-height: 1.2rem; margin-bottom: 6px; color: #FFD59E; }
+
+.input-group{ margin-bottom: 12px; }
+.input-group label{ display:block; font-size: .95rem; margin-bottom: 6px; color: var(--txt); }
+.field{
+  position: relative; display:flex; align-items:center;
+  border: 1px solid var(--border); border-radius: 12px;
+  background: rgba(255,255,255,.06);
+}
+.field:focus-within{
+  border-color: color-mix(in oklab, var(--gold) 38%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--gold) 20%, transparent);
+}
+.field input, .field select, .field textarea{
+  width: 100%; border: 0; outline: 0; background: transparent; color: var(--txt);
+  padding: .9rem 44px; font-size: 1rem; appearance: none;
+}
+.field select{ padding-right: 44px; }
+.field input::placeholder{ color: color-mix(in oklab, var(--muted) 80%, transparent); }
+.field-icon{ position:absolute; left: 12px; color: var(--muted); display:grid; place-items:center; }
+
+/* Ojo contraseña */
+.toggle-pass{
+  position:absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 36px; height: 36px; border-radius: 10px;
+  border:1px solid var(--border); background: var(--glass); color: var(--txt);
+  display:grid; place-items:center; cursor: pointer;
+}
+.toggle-pass:hover{ background: rgba(255,255,255,.12); }
+.toggle-pass .eye-closed{ display:none; }
+.toggle-pass.is-on .eye-open{ display:none; }
+.toggle-pass.is-on .eye-closed{ display:block; }
+
+/* ============= Footer centrado (safe-area) ============= */
+.site-footer{
+  margin-top: auto; border-top: 1px solid var(--border); background: #0e0f12;
+  padding-bottom: max(18px, env(safe-area-inset-bottom)); /* barra de gestos */
+}
+.footer-inner{
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  gap:12px; padding: 18px 0;
+}
+
+/* ============= Responsive Nav para móvil ============= */
+@media (max-width: 920px){
+  .hamburger{ display:flex; }
+  .nav{
+    position: fixed;
+    inset: calc(64px + env(safe-area-inset-top)) 0 auto 0;
+    background: rgba(10,10,12,.92); backdrop-filter: blur(10px);
+    padding: 16px; display:none; flex-direction:column; gap:8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav a{ width: 100%; text-align: center; }
+  /* Mostrar menú cuando el checkbox está activo */
+  .nav-toggle:checked + .hamburger + .nav{ display:flex; }
+}
+
+/* Ajustes móviles */
+@media (max-width: 768px){
+  .registro-card{ padding: 16px; }
+}

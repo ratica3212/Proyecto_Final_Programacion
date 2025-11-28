@@ -1,0 +1,59 @@
+<!-- Declaración del tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Idioma principal del contenido -->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres -->
+  <meta charset="UTF-8" />
+
+  <!-- Configuración para diseño responsivo -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Título que aparece en la pestaña del navegador -->
+  <title>Chats Finalizados</title>
+
+  <!-- Enlace al archivo CSS específico para esta vista -->
+  <link rel="stylesheet" href="../css/chatFinalizado.css" />
+</head>
+
+<body>
+  <!-- Encabezado de la página -->
+  <header>
+    <div class="container">
+      <!-- Título principal visible para el agente de soporte -->
+      <h1>Chats Finalizados - Soporte</h1>
+
+      <!-- Navegación con enlaces para volver o cerrar sesión -->
+      <nav>
+        <!-- Botón de regreso al panel de soporte -->
+        <a href="/html/soporte.html">← Volver</a>
+
+        <!-- Botón para cerrar sesión -->
+        <a href="/" id="cerrar-sesion">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenedor principal del contenido -->
+  <main class="container">
+    <section id="chats-finalizados">
+      <!-- Título de la sección -->
+      <h2 class="titulo-centro">Historial de Conversaciones</h2>
+
+      <!-- Lista donde se renderizarán los chats finalizados desde JavaScript -->
+      <ul id="lista-chats"></ul>
+    </section>
+  </main>
+
+  <!-- Pie de página con información de derechos -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Tienda de Ropa - Soporte.</p>
+    </div>
+  </footer>
+
+  <!-- Enlace al archivo JavaScript que carga los chats finalizados -->
+  <script src="../js/chatsFinalizados.js"></script>
+</body>
+</html>

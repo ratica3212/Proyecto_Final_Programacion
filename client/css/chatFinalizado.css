@@ -1,0 +1,193 @@
+/* RESET Y CONFIGURACIÓN GLOBAL */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Fondo oscuro moderno */
+  background: linear-gradient(180deg, #0A0A0A 0%, #131313 50%, #0A0A0A 100%);
+  color: #E6E6E6;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ESTRUCTURA PRINCIPAL */
+main.container {
+  flex: 1;
+  padding: 2rem;
+  background: #111;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 1000px;
+
+  border-radius: 14px;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
+
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+/* FOOTER */
+footer {
+  background: #0D0D0D;
+  color: #C8C8C8;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* HEADER */
+header {
+  background-color: #0D0D0D;
+  padding: 1rem 0;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+/* Título dorado */
+header h1 {
+  font-size: 26px;
+  margin: 0;
+  background: linear-gradient(135deg, #F6E6A9 0%, #D4AF37 40%, #A57A03 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* NAV */
+header nav a {
+  color: #D4AF37;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  color: #F5D98D;
+}
+
+/* Título centrado (con estilo dorado suave) */
+.titulo-centro {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 22px;
+  background: linear-gradient(135deg, #FFE9A3 0%, #D4AF37 40%, #A57A03 100%);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* Tarjetas de chats */
+#lista-chats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0;
+  list-style: none;
+}
+
+.chat-entrada {
+  flex: 1 1 300px;
+  max-width: 300px;
+  background: #0F0F0F;
+
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 14px;
+
+  padding: 2rem;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.15);
+}
+
+.chat-entrada p {
+  margin: 0.4rem 0;
+  color: #DDD;
+}
+
+/* Enlace tipo botón en dorado */
+.chat-entrada a {
+  display: inline-block;
+  margin-top: 0.8rem;
+  text-decoration: none;
+
+  color: #F5D98D;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.chat-entrada a:hover {
+  color: #D4AF37;
+  text-decoration: underline;
+}
+
+/* RESPONSIVE: MÓVIL */
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  header nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  header nav a {
+    font-size: 0.9rem;
+  }
+
+  main.container {
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  #lista-chats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chat-entrada {
+    flex: 1 1 100px;
+    max-width: 260px;
+    padding: 1rem;
+  }
+
+  .chat-entrada p {
+    margin: 0.2rem 0;
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+
+  .chat-entrada a {
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+    display: inline-block;
+  }
+}

@@ -1,0 +1,62 @@
+<!-- Declaración del tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Inicio del documento HTML en idioma español -->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres para soportar tildes, ñ, etc. -->
+  <meta charset="UTF-8" />
+
+  <!-- Configuración responsive para dispositivos móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Título que aparece en la pestaña del navegador -->
+  <title>Pantalones - Tienda de Ropa</title>
+
+  <!-- Enlace a la hoja de estilos específica para esta página -->
+  <link rel="stylesheet" href="../css/pantalones.css" />
+</head>
+
+<body>
+  <!-- Contenedor principal con layout general -->
+  <div class="layout">
+  
+    <!-- Encabezado del sitio -->
+    <header>
+      <div class="container">
+        <!-- Nombre del sitio -->
+        <h1>Tienda de Ropa</h1>
+
+        <!-- Navegación superior con botón para volver atrás -->
+        <nav>
+          <a href="catalogo.html">← Atrás</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Sección principal del contenido -->
+    <main>
+      <div class="container">
+        <!-- Título de la sección -->
+        <h2>Pantalones disponibles</h2>
+
+        <!-- Contenedor donde se insertarán los productos dinámicamente desde JS -->
+        <div id="productos-container" class="productos-grid">
+          <!-- Aquí se insertan los productos dinámicamente -->
+        </div>
+      </div>  
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Tienda de Ropa.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Script JavaScript para cargar los productos de pantalones -->
+  <script src="../js/pantalones.js"></script>
+</body>
+</html>

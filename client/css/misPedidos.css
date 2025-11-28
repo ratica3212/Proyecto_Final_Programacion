@@ -1,0 +1,200 @@
+/* ===== Reset ===== */
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ height:100%; }
+
+/* ===== Tokens del tema (alineado con el resto del sitio) ===== */
+:root{
+  /* Base dark */
+  --bg:#0b0c10;
+  --surface:#121318;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.12);
+  --txt:#e9ecf1;
+  --muted:#b7beca;
+
+  /* Compat (si algo viejo usa morados) */
+  --brand:#7c5cff;
+  --brand-2:#ff2e63;
+  --grad:linear-gradient(135deg, var(--brand) 0%, #9a6bff 35%, var(--brand-2) 100%);
+
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+
+  /* Paleta dorada */
+  --gold:#D4AF37;          /* dorado brillante */
+  --gold-deep:#A57A03;     /* dorado profundo (sombras) */
+  --gold-soft:#F6E6A9;     /* brillo claro */
+  --grad-gold:linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario en oro oscuro (contraste AA con #fff) */
+  --gold-700:#8A6C00;
+  --gold-800:#6B4E00;
+  --grad-gold-btn:linear-gradient(135deg, var(--gold-700), var(--gold-800));
+}
+
+/* ===== Base ===== */
+body{
+  min-height:100vh;
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial,"Noto Sans";
+  color:var(--txt);
+
+  /* Fondo dorado suave con dos radial-gradient + color base */
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+
+  display:flex; flex-direction:column;
+}
+.container{ width:90%; max-width:1200px; margin:0 auto; }
+
+/* ===== Header (glass + sticky) ===== */
+.site-header{
+  position:sticky; top:0; z-index:1000;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.header-flex{ display:flex; align-items:center; justify-content:space-between; min-height:64px; gap:12px; }
+
+/* Logo en dorado (gradient text) */
+.logo{
+  font-size:1.15rem; letter-spacing:.3px; font-weight:700;
+  background:var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+/* Nav + botones */
+.nav{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.nav-link{ color:var(--txt); text-decoration:none; padding:.5rem .75rem; border-radius:999px; }
+.nav-link:hover{ background:var(--glass); }
+.is-active{ border:1px solid var(--border); background:var(--glass); }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.55rem .9rem; border-radius:999px; border:1px solid transparent; cursor:pointer;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  text-decoration:none; color:var(--txt);
+}
+.btn:hover{ transform:translateY(-1px); }
+
+/* Primario en oro oscuro (por si lo usas aquí) */
+.btn-primary{
+  background: var(--grad-gold-btn);
+  color:#fff;
+  border:1px solid var(--gold);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+.btn-primary:hover{ filter: brightness(1.06); }
+.btn-primary:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)); }
+
+/* Outline a juego (tu botón "Cerrar sesión" ya usa .btn.btn-outline) */
+.btn-outline{
+  background:transparent;
+  border-color: color-mix(in oklab, var(--gold) 55%, transparent);
+}
+.btn-outline:hover{
+  background: color-mix(in oklab, var(--gold) 14%, transparent);
+  border-color: var(--gold);
+}
+
+/* ===== Hero ===== */
+.hero{ padding:28px 0 10px; }
+.hero-inner{ display:flex; flex-direction:column; gap:6px; }
+.eyebrow{ text-transform:uppercase; letter-spacing:.12em; font-size:.8rem; color:var(--muted); }
+
+/* Título "Mis pedidos" en dorado */
+.hero h2{
+  font-size: clamp(1.6rem, 3.8vw, 2.2rem); line-height:1.2;
+  background: var(--grad-gold); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero .sub{ color:var(--muted); }
+
+/* Fallback si el navegador no soporta background-clip:text */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  .logo, .hero h2{ color: var(--gold); background: none; }
+}
+
+/* ===== (Opcional) Tabs de estado si los usas (.tabs .tab) ===== */
+.tabs{
+  display:flex; gap:8px; flex-wrap:wrap; margin: 6px 0 14px;
+}
+.tab{
+  padding:.4rem .8rem; border-radius:999px;
+  border:1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+  background: rgba(255,255,255,.06); color:#e9ecf1; cursor:pointer;
+}
+.tab.is-active{
+  background: var(--grad-gold-btn);
+  border-color: var(--gold); color:#fff;
+}
+
+/* ===== Grid de pedidos (tu JS solo añade .pedido-card adentro) ===== */
+.pedido-grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:16px;
+  margin: 12px auto 28px;
+}
+
+/* ===== Tarjeta de pedido ===== */
+.pedido-card{
+  grid-column: span 6;
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border:1px solid var(--border);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+  padding:14px;
+  backdrop-filter: blur(8px);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .2s ease;
+}
+.pedido-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 36px rgba(0,0,0,.28);
+  border-color: color-mix(in oklab, var(--gold) 28%, var(--border));
+}
+
+/* Encabezado dentro de cada tarjeta (si tu JS lo genera) */
+.pedido-card .pedido-head{
+  display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px;
+}
+.pedido-card .pedido-id{ font-weight:700; letter-spacing:.3px; }
+
+/* Meta: fecha y total */
+.pedido-card .pedido-meta{ display:flex; gap:12px; color:var(--muted); margin:.25rem 0 .35rem; }
+.pedido-card .total{ color:#fff; font-weight:700; }
+
+/* Miniaturas de artículos (si tu JS inserta <img>) */
+.pedido-card .pedido-items{ display:flex; gap:8px; margin-top:8px; }
+.pedido-card .pedido-items img{
+  width:48px; height:48px; object-fit:cover; border-radius:10px; border:1px solid var(--border);
+}
+.pedido-card .item-placeholder{
+  display:grid; place-items:center; width:48px; height:48px; border-radius:10px;
+  background:var(--glass); border:1px solid var(--border); color:var(--muted);
+}
+
+/* Chips de estado (usa tus clases existentes .estado .pagado/.pendiente/.entregado/.cancelado) */
+.estado{ font-size:.85rem; padding:.25rem .6rem; border-radius:999px; border:1px solid; }
+.pagado{    color:#34d399; border-color:#34d39940; background:#34d3991a; }
+.pendiente{ color:#f59e0b; border-color:#f59e0b40; background:#f59e0b1a; }
+.entregado{ color:#60a5fa; border-color:#60a5fa40; background:#60a5fa1a; }
+.cancelado{ color:#f87171; border-color:#f8717140; background:#f871711a; }
+
+/* Empty state opcional (por si tu JS lo usa) */
+.empty{
+  grid-column: span 12;
+  text-align:center; padding:24px;
+  background: rgba(255,255,255,.04);
+  border:1px dashed var(--border);
+  border-radius:14px; color:var(--muted);
+}
+
+/* Footer */
+.site-footer{ margin-top:auto; border-top:1px solid var(--border); background:#0e0f12; }
+.footer-inner{ min-height:60px; display:flex; align-items:center; justify-content:center; color:var(--muted); }
+
+/* Responsive */
+@media (max-width: 920px){
+  .pedido-card{ grid-column: span 12; }
+}

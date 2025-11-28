@@ -1,0 +1,124 @@
+<!-- Declaración del documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Idioma configurado al español -->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres UTF-8 -->
+  <meta charset="UTF-8" />
+
+  <!-- Escala responsive para dispositivos móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Título que se muestra en la pestaña del navegador -->
+  <title>Panel de Soporte</title>
+
+  <!-- Enlace a la hoja de estilos para esta vista -->
+  <link rel="stylesheet" href="../css/soporte.css" />
+</head>
+
+<body>
+  <!-- Encabezado principal del panel -->
+  <header>
+    <div class="container">
+      <!-- Título del panel de soporte -->
+      <h1>Panel de Soporte - Empleados</h1>
+
+      <!-- Menú de navegación -->
+      <nav>
+        <!-- Enlace a la vista de chats en curso -->
+        <a href="/html/chatsEnCurso.html" class="btn btn-secondary">Chats en curso</a>
+
+        <!-- Enlace a la vista de chats finalizados -->
+        <a href="/html/chatsFinalizados.html" class="btn btn-secondary">Chats finalizados</a>
+
+        <!-- Enlace para cerrar sesión -->
+        <a href="/" id="cerrar-sesion">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido principal del panel -->
+  <main class="container">
+    <!-- Sección donde se muestra la cola de usuarios -->
+    <section id="estado-soporte">
+      <h2>Usuarios en espera</h2>
+
+      <!-- Lista dinámica de usuarios esperando atención -->
+      <ul id="lista-usuarios">
+        <!-- Se cargarán dinámicamente -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- Pie de página con derechos -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Tienda de Ropa - Soporte.</p>
+    </div>
+  </footer>
+
+  <!-- Script para manejar la carga dinámica de la cola de soporte -->
+  <script>
+    // Referencia a la lista donde se mostrarán los usuarios
+    const listaUsuarios = document.getElementById('lista-usuarios');
+
+    // Función que carga la cola de soporte desde el backend
+    async function cargarCola() {
+      try {
+        const res = await fetch('/api/soporte/cola');
+        const data = await res.json();
+        listaUsuarios.innerHTML = '';
+
+        // Si la cola está vacía, muestra un mensaje
+        if (data.cola.length === 0) {
+          listaUsuarios.innerHTML = '<li>No hay usuarios en espera.</li>';
+        } else {
+          // Recorre cada usuario en la cola
+          for (let i = 0; i < data.cola.length; i++) {
+            const userId = data.cola[i];
+
+            // Intenta obtener el ID del chat activo del usuario
+            let chatId = null;
+            try {
+              const chatRes = await fetch(`/api/chats/por-usuario/${userId}`);
+              if (chatRes.ok) {
+                const chatData = await chatRes.json();
+                chatId = chatData.id;
+              }
+            } catch (err) {
+              console.warn(`No se pudo obtener el chat para el usuario ${userId}`);
+            }
+
+            // Crea el elemento de lista para cada usuario
+            const li = document.createElement('li');
+            li.innerHTML = `
+              Usuario ${userId} - Posición ${i + 1}
+              ${chatId
+                ? `<a href="/html/chatSoporte.html?chatId=${chatId}" class="btn btn-success">Ingresar al chat</a>`
+                : `<span style="color:red">⚠️ No se encontró chat activo</span>`}
+            `;
+            listaUsuarios.appendChild(li);
+          }
+        }
+      } catch (err) {
+        // Si ocurre un error, muestra mensaje de error
+        listaUsuarios.innerHTML = '<li>Error al cargar la cola.</li>';
+        console.error(err);
+      }
+    }
+
+    // Verifica que el usuario tenga rol 'soporte'
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (!usuario || usuario.rol !== 'soporte') {
+      alert('Acceso denegado. Esta sección es solo para personal de soporte.');
+      window.location.href = '/html/catalogo.html';
+    }
+
+    // Carga la cola inicialmente y la actualiza cada 15 segundos
+    cargarCola();
+    setInterval(cargarCola, 15000);
+  </script>
+
+</body>
+</html>

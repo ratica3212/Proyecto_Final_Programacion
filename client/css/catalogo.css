@@ -1,0 +1,208 @@
+/* ========== Reset + Tokens (tema dorado global) ========== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --bg: #0b0c10;
+  --surface: #121318;
+  --glass: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.12);
+  --txt: #e9ecf1;
+  --muted: #b7beca;
+
+  /* (Se conservan por compatibilidad si algo los usa) */
+  --brand: #7c5cff;
+  --brand-2: #ff2e63;
+  --grad: linear-gradient(135deg, var(--brand) 0%, #9a6bff 35%, var(--brand-2) 100%);
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* Paleta dorada */
+  --gold: #D4AF37;         /* brillo */
+  --gold-deep: #A57A03;    /* sombra */
+  --gold-soft: #F6E6A9;    /* brillo claro */
+  --grad-gold: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 40%, var(--gold-deep) 100%);
+
+  /* Botón primario oro oscuro (mejor contraste con blanco) */
+  --gold-700: #8A6C00;
+  --gold-800: #6B4E00;
+  --grad-gold-btn: linear-gradient(135deg, var(--gold-700), var(--gold-800));
+}
+
+html, body { height: 100%; }
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
+  /* Fondo dorado suave */
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(212,175,55,.18), transparent),
+    radial-gradient(900px 480px at 12% 28%, rgba(161,98,7,.12), transparent),
+    var(--bg);
+  color: var(--txt);
+  line-height: 1.6;
+  display: flex; flex-direction: column;
+}
+
+.container{ width: 90%; max-width: 1200px; margin: 0 auto; }
+
+/* ========== Header sticky (glass) ========== */
+.site-header{
+  position: sticky; top: 0; z-index: 1000;
+  background: color-mix(in oklab, var(--surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; min-height:64px; gap:12px; }
+
+/* Logo y títulos en dorado (gradient text) */
+.logo{
+  font-size: 1.1rem; letter-spacing: .3px;
+  background: var(--grad-gold); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Navegación */
+.nav{ display:flex; align-items:center; gap:10px; }
+.nav-link{ color: var(--txt); text-decoration: none; padding: .45rem .75rem; border-radius: 999px; }
+.nav-link:hover{ background: var(--glass); }
+
+/* ========== Botones (oro) ========== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.6rem 1rem; border-radius:999px; border:1px solid transparent;
+  text-decoration:none; cursor:pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+
+/* Primario: oro oscuro */
+.btn-primary{
+  background: var(--grad-gold-btn);
+  color:#fff;
+  border:1px solid var(--gold);
+  box-shadow: var(--shadow);
+}
+.btn-primary:hover{ filter: brightness(1.06); }
+.btn-primary:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+.btn-primary:active{ background: linear-gradient(135deg, var(--gold-800), var(--gold-800)); }
+
+/* Secundarios a juego */
+.btn-outline{
+  background: transparent;
+  border:1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+  color: #e9ecf1;
+}
+.btn-outline:hover{ background: color-mix(in oklab, var(--gold) 14%, transparent); border-color: var(--gold); }
+
+.btn-ghost{
+  background: var(--glass); color: var(--txt);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+}
+.btn-ghost:hover{ background: color-mix(in oklab, var(--gold) 12%, transparent); border-color: var(--gold); }
+
+/* ========== Hero ========== */
+.hero{ padding: 28px 0 8px; text-align: left; }
+.hero-inner{ display:flex; flex-direction:column; gap:6px; }
+.eyebrow{ text-transform: uppercase; letter-spacing:.12em; font-size:.8rem; color: var(--muted); }
+/* Títulos del hero en dorado */
+.hero h2{
+  font-size: clamp(1.4rem, 3.2vw, 1.9rem); line-height:1.2;
+  background: var(--grad-gold); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero .sub{ color: var(--muted); }
+
+/* Fallback si el navegador no soporta background-clip:text */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)){
+  .logo, .hero h2, .catalogo-card h3{ color: var(--gold); background: none; }
+}
+
+/* ========== Grid de categorías ========== */
+.catalogo-lista{
+  display:grid; grid-template-columns: repeat(12, 1fr);
+  gap: 16px; margin: 18px auto 24px;
+}
+.catalogo-card{
+  position:relative; grid-column: span 4;
+  aspect-ratio: 16 / 9;             /* todas del mismo tamaño */
+  min-height: 220px;                 /* respaldo en pantallas estrechas */
+  border-radius: calc(var(--radius) + 2px);
+  overflow: hidden; isolation: isolate; cursor: pointer; border:1px solid var(--border);
+  background: #1a1c24 center/cover no-repeat; box-shadow: 0 12px 30px rgba(0,0,0,.18);
+  transform: translateZ(0);
+}
+.catalogo-card::after{
+  content:""; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55) 65%);
+}
+.catalogo-card .card-overlay{
+  position:absolute; inset:auto 0 0 0; z-index:2;
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+  padding: 16px;
+}
+.catalogo-card h3{
+  font-size: 1.15rem;
+  background: var(--grad-gold); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.catalogo-card .card-cta{
+  padding: .35rem .6rem; border-radius: 999px; font-size: .9rem;
+  background: var(--glass); border:1px solid var(--border); color: var(--txt);
+}
+
+/* Hover / micro-interacciones */
+.catalogo-card{ transition: transform .3s ease, box-shadow .3s ease, border-color .2s ease; }
+.catalogo-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0,0,0,.28);
+  border-color: color-mix(in oklab, var(--gold) 28%, var(--border));
+}
+
+/* Imágenes por categoría (ajusta rutas a tus archivos) */
+.cat-camisas{    background-image: url('../img/categorias/camisas.jpg'); }
+.cat-pantalones{ background-image: url('../img/categorias/pantalones.jpg'); }
+.cat-zapatos{    background-image: url('../img/categorias/zapatos.jpg'); }
+
+/* ========== Banner informativo ========== */
+.info-banner{
+  background: var(--glass); border:1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  padding: 12px 16px; text-align: center; color: var(--muted);
+}
+
+/* ========== Footer ========== */
+.site-footer{ margin-top: 28px; border-top: 1px solid var(--border); background: #0e0f12; }
+.footer-inner{ display:flex; align-items:center; justify-content:center; min-height:60px; color: var(--muted); }
+
+/* ========== Soporte (conservo tus IDs) ========== */
+#icono-soporte{
+  position: fixed; bottom: 20px; right: 20px; z-index: 1000; cursor: pointer;
+  width: 60px; height: 60px; border-radius: 50%; background: #fff;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  transition: transform .25s ease;
+}
+#icono-soporte:hover{ transform: scale(1.08) rotate(3deg); }
+
+/* Widget chat — a juego en dorado, sin romper tus toggles */
+#widget-chat{
+  position: fixed; bottom: 80px; right: 20px; width: 320px; max-width: 92vw; height: 420px;
+  background: #121318; border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25); overflow: hidden; z-index: 9999;
+}
+#widget-chat .chat-head{
+  background: var(--grad-gold-btn); color: white; padding: 12px; text-align: center; font-weight: 700;
+}
+#widget-chat .chat-inicial{ padding: 14px; text-align: center; color: var(--txt); }
+#widget-chat .chat-estado{ margin: 8px 12px; text-align: center; color: var(--muted); }
+#widget-chat .chat-msgs{
+  padding: 10px; height: 300px; overflow-y: auto; background: #0f1116; color: var(--txt);
+}
+#widget-chat .chat-input-wrap{
+  display:flex; border-top: 1px solid var(--border); background:#121318;
+}
+#widget-chat input#input-chat{
+  flex:1; border: none; padding: 10px; background: transparent; color: var(--txt);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 920px){
+  .catalogo-card{ grid-column: span 6; min-height: 200px; }
+}
+@media (max-width: 600px){
+  .catalogo-card{ grid-column: span 12; min-height: 180px; }
+}

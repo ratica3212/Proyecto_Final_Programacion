@@ -1,0 +1,87 @@
+<!-- Declaración del tipo de documento HTML5 -->
+<!DOCTYPE html>
+
+<!-- Idioma principal español -->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres -->
+  <meta charset="UTF-8" />
+
+  <!-- Escalado responsivo para móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Título en la pestaña del navegador -->
+  <title>Chat Soporte</title>
+
+  <!-- Enlace al archivo CSS que da estilo al chat -->
+  <link rel="stylesheet" href="../css/chat.css" />
+</head>
+
+<body>
+  <!-- Encabezado de la página -->
+  <header>
+    <div class="container">
+      <!-- Título principal visible del encabezado -->
+      <h1>Chat Soporte</h1>
+
+      <!-- Navegación con enlaces -->
+      <nav>
+        <!-- Enlace para volver a la lista de chats en curso -->
+        <a href="/html/chatsEnCurso.html">← Volver</a>
+
+        <!-- Enlace para cerrar sesión -->
+        <a href="/" id="cerrar-sesion">Cerrar Sesión</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cuerpo principal del sitio -->
+  <main class="container">
+    <section id="chat">
+      <!-- Contenedor donde se mostrarán los mensajes del chat -->
+      <div id="mensajes" class="chat-box">
+        <!-- Aquí se mostrarán los mensajes -->
+      </div>
+
+      <!-- Formulario para enviar nuevos mensajes y finalizar el chat -->
+      <form id="form-chat">
+        <!-- Campo de entrada de texto del mensaje -->
+        <input type="text" id="mensaje" placeholder="Escribe un mensaje..." required />
+
+        <!-- Botón para enviar el mensaje -->
+        <button type="submit">Enviar</button>
+
+        <!-- Botón para finalizar la atención del chat -->
+        <button type="button" id="finalizar-chat">Finalizar Atención</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Pie de página del sitio -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Tienda de Ropa - Soporte.</p>
+    </div>
+  </footer>
+
+  <!-- Script JavaScript para manejar la lógica del chat (envío, recepción, finalización) -->
+  <script src="../js/chatSoporte.js"></script>
+
+  <!-- Script para verificar el rol y cerrar sesión -->
+  <script>
+    // Verifica si el usuario es del rol "soporte"
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (!usuario || usuario.rol !== 'soporte') {
+      alert('Acceso denegado.');
+      window.location.href = '/html/catalogo.html';
+    }
+
+    // Acción de cerrar sesión: limpia datos del localStorage y redirige al inicio
+    document.getElementById('cerrar-sesion').addEventListener('click', () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('usuario');
+      window.location.href = '/';
+    });
+  </script>
+</body>
+</html>
